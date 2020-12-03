@@ -11,6 +11,8 @@ class Transactions extends React.Component {
 constructor(props){
 super(props)
     this.state = {
+        actualBalance: null,
+        reconciledBalance: null,
         searchTerm: '',
         items: []
     }
@@ -75,7 +77,13 @@ searchbyproperty=(searchbyProp)=>{
   
   
   }
+ getActualBalance=()=>{
 
+ }
+
+ getReconciledBalance=()=>{
+   
+}
 
 render(){
 
