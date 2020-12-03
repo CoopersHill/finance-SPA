@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
-
+import {sortByNameA} from '../Functions/sortFunctions'
 
 
 class Transactions extends React.Component {
@@ -12,7 +12,7 @@ super(props)
     this.state = {
         error: null,
         isLoaded: false,
-        transactions,
+        transactions: [],
         items: []
     }
 }
@@ -25,21 +25,31 @@ componentDidMount(){
         
         this.setState({
             items: data,
-            transactins: data
+            transactions: data
         })
         console.log(data)
     })
 }
 
 sortbyproperty=(sortProp)=>{
-if(sortProp === name){
+if(sortProp === 'name'){
 // sort function
-}else if (sortProp === cost){
+}else if (sortProp === 'cost'){
 // sort function
 }
 
 
 }
+
+searchbyproperty=(searchbyProp)=>{
+  if(searchbyProp === 'name'){
+  // sort function
+  }else if (searchbyProp === 'amount'){
+  // sort function
+  }
+  
+  
+  }
 
 
 render(){
@@ -72,6 +82,12 @@ render(){
               <div className="badge badge-primary px-3">On Hold</div>
               <div className="font-size-sm text-danger px-2">
                 filters go here
+
+                <button
+                onClick={()=>{
+                  sortByNameA(this.state.transactions)
+                }}
+                >search button</button>
               </div>
             </div>
           </CardContent>
