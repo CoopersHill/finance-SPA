@@ -10,9 +10,7 @@ class Transactions extends React.Component {
 constructor(props){
 super(props)
     this.state = {
-        error: null,
-        isLoaded: false,
-        transactions: [],
+       
         items: []
     }
     this.sortbyproperty = this.sortbyproperty.bind(this)
@@ -26,21 +24,25 @@ componentDidMount(){
         
         this.setState({
             items: data,
-            transactions: data
         })
         console.log(data)
     })
 }
 
 sortbyproperty=(sortType)=>{
+  let items
 if(sortType === 'nameHighest'){
-console.log(sortByNameA(this.state.transactions))
+items = sortByNameA(this.state.items)
+console.log('sortAlpha', sortByNameA(this.state.items))
 }else if (sortType === 'nameLowest'){
-  console.log(sortByNameZ(this.state.transactions))
+  items = sortByNameZ(this.state.items)
+  console.log('sortBeta', sortByNameZ(this.state.items))
 
 }
 
-
+this.setState({
+  items: items
+})
 }
 
 searchbyproperty=(searchbyProp)=>{
@@ -95,6 +97,7 @@ render(){
                   this.sortbyproperty('nameLowest')
                 }}
                 >sort button omega</button>
+               
               </div>
             </div>
           </CardContent>
