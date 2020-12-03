@@ -8,3 +8,11 @@ export const searchByName =(arr, searchTerm)=>{
     console.log('filtered', filtered)
     return filtered
 }
+
+export const searchByCost =(arr, searchTerm)=>{
+    let filtered = arr.filter((f)=>{
+        return f.itemCost.includes(searchTerm)
+    })
+    console.log('filtered', filtered)
+    return filtered
+}

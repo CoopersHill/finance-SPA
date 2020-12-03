@@ -15,6 +15,7 @@ super(props)
         items: []
     }
     this.sortbyproperty = this.sortbyproperty.bind(this)
+    this.performSearch = this.performSearch.bind(this)
 }
 
 componentDidMount(){
@@ -58,7 +59,13 @@ handleSearch = (e)=>{
     searchTerm: e.target.value 
   })
 }
+performSearch = ()=>{
+searchByName(this.state.items, this.state.searchTerm)
+this.setState({
+  items: searchByName(this.state.items, this.state.searchTerm)
 
+})
+}
 searchbyproperty=(searchbyProp)=>{
   if(searchbyProp === 'name'){
   // sort function
@@ -108,7 +115,7 @@ render(){
              <button
              onClick={(e)=>{
                e.preventDefault()
-               searchByName(this.state.items, this.state.searchTerm)
+this.performSearch()
             console.log('clicked')
              }}
              >search for {this.state.searchTerm}</button>
