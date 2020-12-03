@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
-import {sortByNameA, sortByNameZ} from '../Functions/sortFunctions'
+import {sortByNameA, sortByNameZ, sortByCostHighest, sortByCostLowest} from '../Functions/sortFunctions'
 
 
 class Transactions extends React.Component {
@@ -38,7 +38,14 @@ console.log('sortAlpha', sortByNameA(this.state.items))
   items = sortByNameZ(this.state.items)
   console.log('sortBeta', sortByNameZ(this.state.items))
 
-}
+}else if(sortType === 'costHighest'){
+  items = sortByCostHighest(this.state.items)
+  console.log('sortAlpha', sortByCostHighest(this.state.items))
+  }else if (sortType === 'costLowest'){
+    items = sortByCostLowest(this.state.items)
+    console.log('sortBeta', sortByCostLowest(this.state.items))
+  
+  }
 
 this.setState({
   items: items
@@ -89,14 +96,14 @@ render(){
 
                 <button
                 onClick={()=>{
-                  this.sortbyproperty('nameHighest')
+                  this.sortbyproperty('costHighest')
                 }}
-                >sort button alpha</button>
+                >sort cost highest</button>
                 <button
                 onClick={()=>{
-                  this.sortbyproperty('nameLowest')
+                  this.sortbyproperty('costLowest')
                 }}
-                >sort button omega</button>
+                >sort cost lowest</button>
                
               </div>
             </div>

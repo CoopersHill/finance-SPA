@@ -37,3 +37,20 @@ export const sortByNameZ = (arr)=>{
 
     return omega
 }
+
+
+export const sortByCostLowest = (arr)=>{
+    let alpha = arr.sort((a, b)=>{
+       return a.itemCost - b.itemCost
+     })
+   
+       return alpha
+   }
+
+   export const sortByCostHighest = (arr)=>{
+    let omega = arr.sort((a, b)=>{
+       return b.itemCost - a.itemCost
+     })
+   
+       return omega
+   }
