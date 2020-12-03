@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
-import {sortByNameA} from '../Functions/sortFunctions'
+import {sortByNameA, sortByNameZ} from '../Functions/sortFunctions'
 
 
 class Transactions extends React.Component {
@@ -15,6 +15,7 @@ super(props)
         transactions: [],
         items: []
     }
+    this.sortbyproperty = this.sortbyproperty.bind(this)
 }
 
 componentDidMount(){
@@ -31,11 +32,12 @@ componentDidMount(){
     })
 }
 
-sortbyproperty=(sortProp)=>{
-if(sortProp === 'name'){
-// sort function
-}else if (sortProp === 'cost'){
-// sort function
+sortbyproperty=(sortType)=>{
+if(sortType === 'nameHighest'){
+console.log(sortByNameA(this.state.transactions))
+}else if (sortType === 'nameLowest'){
+  console.log(sortByNameZ(this.state.transactions))
+
 }
 
 
@@ -85,9 +87,14 @@ render(){
 
                 <button
                 onClick={()=>{
-                  sortByNameA(this.state.transactions)
+                  this.sortbyproperty('nameHighest')
                 }}
-                >search button</button>
+                >sort button alpha</button>
+                <button
+                onClick={()=>{
+                  this.sortbyproperty('nameLowest')
+                }}
+                >sort button omega</button>
               </div>
             </div>
           </CardContent>

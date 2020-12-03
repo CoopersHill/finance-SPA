@@ -17,14 +17,23 @@ let alpha = arr.sort((a, b)=>{
   })
 
 
-console.log(alpha)
 return alpha
 }
 
 export const sortByNameZ = (arr)=>{
  let omega = arr.sort((a, b)=>{
-        return b - a
-    })
-    console.log(omega)
+    var nameA = a.itemName.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.itemName.toUpperCase(); // ignore upper and lowercase
+    if (nameA > nameB) {
+      return -1;
+    }
+    if (nameA < nameB) {
+      return 1;
+    }
+  
+    // names must be equal
+    return 0;
+  })
+
     return omega
 }
