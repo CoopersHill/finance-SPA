@@ -4,13 +4,14 @@ import React, { Fragment } from 'react';
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
 import {sortByNameA, sortByNameZ, sortByCostHighest, sortByCostLowest} from '../Functions/sortFunctions'
+import {searchByName} from '../Functions/searchFunctions'
 
 
 class Transactions extends React.Component {
 constructor(props){
 super(props)
     this.state = {
-       
+        searchTerm: '',
         items: []
     }
     this.sortbyproperty = this.sortbyproperty.bind(this)
@@ -50,6 +51,12 @@ console.log('sortAlpha', sortByNameA(this.state.items))
 this.setState({
   items: items
 })
+}
+
+handleSearch = (e)=>{
+  this.setState({
+    searchTerm: e.target.value 
+  })
 }
 
 searchbyproperty=(searchbyProp)=>{
@@ -94,16 +101,19 @@ render(){
               <div className="font-size-sm text-danger px-2">
                 filters go here
 
-                <button
-                onClick={()=>{
-                  this.sortbyproperty('costHighest')
-                }}
-                >sort cost highest</button>
-                <button
-                onClick={()=>{
-                  this.sortbyproperty('costLowest')
-                }}
-                >sort cost lowest</button>
+             <form >
+             <input type='text' onChange={(e)=>{
+               this.handleSearch(e)
+             }} />
+             <button
+             onClick={(e)=>{
+               e.preventDefault()
+               searchByName(this.state.items, this.state.searchTerm)
+            console.log('clicked')
+             }}
+             >search for {this.state.searchTerm}</button>
+            
+             </form>
                
               </div>
             </div>
