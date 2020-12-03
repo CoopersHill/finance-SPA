@@ -5,14 +5,18 @@ import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
 import {sortByNameA, sortByNameZ, sortByCostHighest, sortByCostLowest} from '../Functions/sortFunctions'
 import {searchByName} from '../Functions/searchFunctions'
+import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
+
 
 
 class Transactions extends React.Component {
 constructor(props){
 super(props)
     this.state = {
-        actualBalance: null,
-        reconciledBalance: null,
+      projectedBalanceTotal: null,
+       pendingTransactionsTotal: null, 
+       actualTransactionsTotal: null,
+        accountBalance: 1000000000,  
         searchTerm: '',
         items: []
     }
@@ -24,10 +28,13 @@ componentDidMount(){
     fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
     .then(response => response.json())
     .then((data) =>{
-
-        
+       
+      pendingTransactionsCalc(data)
         this.setState({
             items: data,
+            projectedBalanceTotal: projectedBalanceCalc(data) / 100, 
+            pendingTransactionsTotal: pendingTransactionsCalc(data) /100, 
+            actualTransactionsTotal: actualTransactionsCalc(data) /100
         })
         console.log(data)
     })
@@ -77,41 +84,21 @@ searchbyproperty=(searchbyProp)=>{
   
   
   }
- getActualBalance=()=>{
-let allCosts = []
-let reconciledCosts =[]
-this.state.items.map((m)=>{
-allCosts.push(m.itemCost)
-if(m.recStatus === true){
-  reconciledCosts.push(m.itemCost)
-}
-  return m.itemCost
-})
 
-let actualBalance = allCosts.reduce((a, b)=>{
-return  a+b
-})
-let reconciledBalance = reconciledCosts.reduce((a, b)=>{
-  return  a+b
-  })
-console.log('actual balance', actualBalance)
-console.log('reconciled balance', reconciledBalance)
-
- }
-
- getReconciledBalance=()=>{
-   
-}
 
 render(){
 
     return(
         <div>
+
+        projectedBalanceCalc {this.state.projectedBalanceTotal},
+         pendingTransactionsCalc {this.state.pendingTransactionsTotal},
+          actualTransactionsCalc {this.state.actualTransactionsTotal}
         <button
         onClick={()=>{
           this.getActualBalance()
         }}
-        >TEST</button>
+        >TEST balance {this.state.accountBalance - this.state.actualBalance}</button>
         <Grid container spacing={4}>
         <Grid item>
           <Card className="card-box mb-4">
