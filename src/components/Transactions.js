@@ -3,50 +3,7 @@ import React, { Fragment } from 'react';
 
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
-const testItems = [
-    {
-        id: 7,
-        email: "michael.lawson@reqres.in",
-        first_name: "Michael",
-        last_name: "Lawson",
-        avatar: "https://reqres.in/img/faces/7-image.jpg"
-    },
-    {
-        id: 8,
-        email: "lindsay.ferguson@reqres.in",
-        first_name: "Lindsay",
-        last_name: "Ferguson",
-        avatar: "https://reqres.in/img/faces/8-image.jpg"
-    },
-    {
-        id: 9,
-        email: "tobias.funke@reqres.in",
-        first_name: "Tobias",
-        last_name: "Funke",
-        avatar: "https://reqres.in/img/faces/9-image.jpg"
-    },
-    {
-        id: 7,
-        email: "michael.lawson@reqres.in",
-        first_name: "Michael",
-        last_name: "Lawson",
-        avatar: "https://reqres.in/img/faces/7-image.jpg"
-    },
-    {
-        id: 8,
-        email: "lindsay.ferguson@reqres.in",
-        first_name: "Lindsay",
-        last_name: "Ferguson",
-        avatar: "https://reqres.in/img/faces/8-image.jpg"
-    },
-    {
-        id: 9,
-        email: "tobias.funke@reqres.in",
-        first_name: "Tobias",
-        last_name: "Funke",
-        avatar: "https://reqres.in/img/faces/9-image.jpg"
-    }
-]
+
 
 
 class Transactions extends React.Component {
@@ -55,61 +12,87 @@ super(props)
     this.state = {
         error: null,
         isLoaded: false,
+        transactions,
         items: []
     }
 }
 
 componentDidMount(){
-    fetch('https://cors-anywhere.herokuapp.com/https://reqres.in/api/users?page=2')
+    fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
     .then(response => response.json())
     .then((data) =>{
 
         
         this.setState({
-            items: data
+            items: data,
+            transactins: data
         })
         console.log(data)
     })
 }
+
+sortbyproperty=(sortProp)=>{
+if(sortProp === name){
+// sort function
+}else if (sortProp === cost){
+// sort function
+}
+
+
+}
+
 
 render(){
 
     return(
         <div>
         <Grid container spacing={4}>
-        <Grid item xs={6} sm={6} lg={3}>
+        <Grid item>
           <Card className="card-box mb-4">
             <div className="card-indicator bg-first" />
             <CardContent className="px-4 py-3">
               <div className="pb-3 d-flex justify-content-between">
-                <a href="#/" onClick={e => e.preventDefault()}>
-                  Presentation site UX
-                </a>
+               crud goes here
               </div>
               <div className="d-flex align-items-center justify-content-start">
                 <div className="badge badge-primary px-3">On Hold</div>
                 <div className="font-size-sm text-danger px-2">
-                  14:22
+                  create update delete
                 </div>
               </div>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={6} sm={6} lg={3}>
-        {testItems.map((m)=>{
+          <Card className="card-box mb-4">
+          <div className="card-indicator bg-first" />
+          <CardContent className="px-4 py-3">
+            <div className="pb-3 d-flex justify-content-between">
+            filters 
+            </div>
+            <div className="d-flex align-items-center justify-content-start">
+              <div className="badge badge-primary px-3">On Hold</div>
+              <div className="font-size-sm text-danger px-2">
+                filters go here
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </Grid>
+        <Grid item >
+        {this.state.items.map((m)=>{
             return(
              
-              <Card key={m.id} style={{borderLeft: '5px dashed red '}} className="card-box mb-4 w-25">
+              <Card key={m.id} style={{borderLeft: '5px dashed red '}} className="card-box mb-4">
               <div className="card-indicator bg-first" />
+              {m.itemName}
               <CardContent className="px-4 py-3">
                 <div className="pb-3 d-flex justify-content-between">
                  {m.id}
-                 {m.email}
+                 {m.itemName}
                 </div>
                 <div className="d-flex align-items-center justify-content-start">
                   <div className="badge badge-primary px-3">On Hold</div>
                   <div className="font-size-sm text-danger px-2">
-                   {m.itemName}
+                   {m.itemCost}
                   </div>
                 </div>
               </CardContent>
@@ -119,26 +102,7 @@ render(){
           })}
      
         </Grid>
-      
-        <Grid item xs={6} sm={6} lg={3}>
-          <Card className="card-box mb-4">
-            <div className="card-indicator bg-warning" />
-            <CardContent className="px-4 py-3">
-              <div className="pb-3 d-flex justify-content-between">
-                <a href="#/" onClick={e => e.preventDefault()}>
-                  UX research
-                </a>
-              </div>
-              <div className="d-flex align-items-center justify-content-start">
-                <span className="px-3 badge badge-warning">Scheduled</span>
-                <div className="font-size-sm text-danger px-2">
-                  11:35
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+       </Grid>
       
 
         </div>
