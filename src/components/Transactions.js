@@ -78,6 +78,24 @@ searchbyproperty=(searchbyProp)=>{
   
   }
  getActualBalance=()=>{
+let allCosts = []
+let reconciledCosts =[]
+this.state.items.map((m)=>{
+allCosts.push(m.itemCost)
+if(m.recStatus === true){
+  reconciledCosts.push(m.itemCost)
+}
+  return m.itemCost
+})
+
+let actualBalance = allCosts.reduce((a, b)=>{
+return  a+b
+})
+let reconciledBalance = reconciledCosts.reduce((a, b)=>{
+  return  a+b
+  })
+console.log('actual balance', actualBalance)
+console.log('reconciled balance', reconciledBalance)
 
  }
 
@@ -89,6 +107,11 @@ render(){
 
     return(
         <div>
+        <button
+        onClick={()=>{
+          this.getActualBalance()
+        }}
+        >TEST</button>
         <Grid container spacing={4}>
         <Grid item>
           <Card className="card-box mb-4">
