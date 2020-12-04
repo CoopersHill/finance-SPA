@@ -54,3 +54,42 @@ export const sortByCostLowest = (arr)=>{
    
        return omega
    }
+
+
+   export const sortByStatusFalse = (arr)=>{
+    let alpha = arr.sort((a, b)=>{
+
+      if (a.recStatus > b.recStatus) {
+        return -1;
+      }
+      if (a.recStatus < b.recStatus) {
+        return 1;
+      }
+    
+      // names must be equal
+      return 0;
+    })
+  
+  console.log('false first',alpha)
+  return alpha
+   }
+
+
+   export const sortByStatusTrue = (arr)=>{
+    let alpha = arr.sort((a, b)=>{
+
+      if (a.recStatus < b.recStatus) {
+        return -1;
+      }
+      if (a.recStatus > b.recStatus) {
+        return 1;
+      }
+    
+      // names must be equal
+      return 0;
+    })
+  
+    console.log('true first', alpha)
+
+  return alpha
+   }
