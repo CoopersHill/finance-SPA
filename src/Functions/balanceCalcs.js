@@ -18,7 +18,6 @@ export const projectedBalanceCalc = (arr)=>{
     return  a+b
     })
     
-    console.log('actual balance', projectedBalanceReduced/100)
     
     return projectedBalanceReduced
      }
@@ -41,13 +40,19 @@ let array = arr.filter((f)=>{
         return m
       })
   
-    let pendingTransactionsReduced = pendingTransactions.reduce((a, b)=>{
-      return  a+b
-      })
+      let pendingTransactionsReduced
+if(pendingTransactions.length > 0){
+return pendingTransactionsReduced =  pendingTransactions.reduce((a, b)=>{
+    return  a+b
+    })
+}else if(pendingTransactions.length < 1){
+return pendingTransactionsReduced = 0
+}
+
+    
 
       
-      console.log('pending transactions', pendingTransactionsReduced /100) 
-      console.log('filtered false', array)
+
             return pendingTransactionsReduced
 
 
@@ -75,9 +80,6 @@ let array = arr.filter((f)=>{
       return  a+b
       })
 
-      
-      console.log('finished transactions', actualTransactionsReduced /100) 
-      console.log('filtered true', array)
-
+   
       return actualTransactionsReduced
   }

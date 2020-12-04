@@ -15,6 +15,7 @@ constructor(props){
 super(props)
     this.state = {
       itemName: '',
+      itemCost: '',
       projectedBalanceTotal: null,
        pendingTransactionsTotal: null, 
        actualTransactionsTotal: null,
@@ -23,6 +24,7 @@ super(props)
         items: []
     }
     this.handleItemName = this.handleItemName.bind(this)
+    this.handleItemCost = this.handleItemCost.bind(this)
     this.sortbyproperty = this.sortbyproperty.bind(this)
     this.performSearch = this.performSearch.bind(this)
 }
@@ -32,6 +34,11 @@ this.setState({
   itemName: value
 })
 }
+handleItemCost = (value)=>{
+  this.setState({
+    itemCost: value
+  })
+  }
 
 componentDidMount(){
     fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
@@ -101,7 +108,6 @@ render(){
 
     return(
         <div>
-<CrudForm handleItemName={this.handleItemName} itemName={this.state.itemName}  />
         <Grid container spacing={4}>
         <Grid item>
      
@@ -168,11 +174,14 @@ this.performSearch()
       filters 
       </div>
       <div className="d-flex align-items-center justify-content-start">
-        <div className="badge badge-primary px-3">On Hold</div>
         <div className="font-size-sm text-danger px-2">
 
 
-        sort
+        <CrudForm 
+        handleItemName={this.handleItemName} itemName={this.state.itemName}  
+        handleItemCost={this.handleItemCost} itemName={this.state.itemCost}
+        />
+
          
         </div>
       </div>
