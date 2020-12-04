@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
     Grid,
@@ -12,9 +12,34 @@ import {
     Divider
   } from '@material-ui/core';
 
-const CrudForm =(props)=>{
+const CreateTransactionForm =(props)=>{
+
+    const [itemName, setItemName] = useState('')
+    const [itemCost, setItemCost] = useState(0)
 
 
+
+
+
+
+const postTransaction = ()=>{
+    let transactionObject = {
+        itemName: itemName,
+        itemCost: itemCost,
+    }
+
+    fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(transactionObject)
+    })
+    .then(response => response.json())
+    .then((data)=>{
+        console.log(data)
+    })
+}
 
 
     return(
@@ -31,10 +56,10 @@ const CrudForm =(props)=>{
             
             
             <TextField
-            value={props.itemName}
+            value={itemName}
                 onChange={(e)=>{
                     e.preventDefault()
-                    props.handleItemName(e.target.value)
+                    setItemName(e.target.value)
                 }}
                 className="m-2"
                 type='text'
@@ -42,9 +67,10 @@ const CrudForm =(props)=>{
                 variant="outlined"
               />
               <TextField
+              value={itemCost}
               onChange={(e)=>{
                 e.preventDefault()
-                props.handleItemCost(e.target.value)
+                setItemCost(e.target.value)
             }}
               className="m-2"
         type='number'
@@ -55,6 +81,10 @@ step='.01' min='.01' max='10000000000000000000000000'
             </div>
           </Grid>
 <button
+onClick={(e)=>{
+    e.preventDefault()
+postTransaction()
+}}
 >
 post transaction
 </button>
@@ -65,4 +95,4 @@ post transaction
     )
 }
 
-export default CrudForm
+export default CreateTransactionForm

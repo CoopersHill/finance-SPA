@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import CrudForm from '../components/crudForm'
+import CreateTransactionForm from '../components/crudForm'
 
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
 
@@ -14,8 +14,6 @@ class Transactions extends React.Component {
 constructor(props){
 super(props)
     this.state = {
-      itemName: '',
-      itemCost: '',
       projectedBalanceTotal: null,
        pendingTransactionsTotal: null, 
        actualTransactionsTotal: null,
@@ -23,22 +21,12 @@ super(props)
         searchTerm: '',
         items: []
     }
-    this.handleItemName = this.handleItemName.bind(this)
-    this.handleItemCost = this.handleItemCost.bind(this)
+    
     this.sortbyproperty = this.sortbyproperty.bind(this)
     this.performSearch = this.performSearch.bind(this)
 }
 
-handleItemName = (value)=>{
-this.setState({
-  itemName: value
-})
-}
-handleItemCost = (value)=>{
-  this.setState({
-    itemCost: value
-  })
-  }
+
 
 componentDidMount(){
     fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
@@ -177,10 +165,7 @@ this.performSearch()
         <div className="font-size-sm text-danger px-2">
 
 
-        <CrudForm 
-        handleItemName={this.handleItemName} itemName={this.state.itemName}  
-        handleItemCost={this.handleItemCost} itemName={this.state.itemCost}
-        />
+        <CreateTransactionForm/>
 
          
         </div>
