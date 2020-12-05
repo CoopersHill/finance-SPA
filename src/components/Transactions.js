@@ -108,58 +108,21 @@ render(){
         
         </Badge>
     
-        <Grid container spacing={4}>
+        <Grid container >
 
-        <Grid item>
-     
-        <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-      
-        <Card className="card-box mb-4">
-      <div className="card-indicator bg-first" />
-      <CardContent className="px-4 py-3">
-        <div className="pb-3 d-flex justify-content-between">
-        filters 
-        </div>
-        <div className="d-flex align-items-center justify-content-start">
-          <div className="badge badge-primary px-3">On Hold</div>
-          <div className="font-size-sm text-danger px-2">
-            filters go here
-
-         <form >
-         <input type='text' onChange={(e)=>{
-           this.handleSearch(e)
-         }} />
-         <button
-         onClick={(e)=>{
-           e.preventDefault()
-this.performSearch()
-        console.log('clicked')
-         }}
-         >search for {this.state.searchTerm}</button>
+    
+        <Grid item className='text-center' >
         
-         </form>
-           
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-    
-    <Card className="card-box mb-4">
-   
-      <CreateTransactionForm/>
-    
-      
- 
-  </Card>
-
-    
-
-        </div>
-     
-        </Grid>
-        <Grid item >
-        
-<div  style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+<div  style={{
+  border: '2px solid red ',
+width: '100vw',
+  display: 'flex', 
+flexDirection: 'column', 
+flexWrap: 'wrap', 
+alignItems: 'center', 
+alignContent: 'center',
+ justifyContent: 'center',
+justifyItems: 'center' }}>
 
 {this.state.items.map((m)=>{
   return(

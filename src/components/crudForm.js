@@ -55,7 +55,7 @@ const postTransaction = ()=>{
                 e.preventDefault()
                 setItemName(e.target.value)
             }}
-            className="m-2"
+            style={{height: '5rem', width: '8rem'}}
             type='text'
             label="Item"
             variant="outlined"
@@ -66,9 +66,10 @@ const postTransaction = ()=>{
             e.preventDefault()
             setItemCost(e.target.value)
         }}
-          className="m-2"
+        style={{ width: '7rem'}}
     type='number'
 step='.01' min='.01' max='10000000000000000000000000'
+value={itemCost}
             label="Cost"
             variant="outlined"
           />
