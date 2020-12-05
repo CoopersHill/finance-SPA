@@ -114,6 +114,7 @@ render(){
     
         <Grid item className='text-center' >
         
+  
 <div  style={{
   border: '2px solid red ',
 width: '100vw',
@@ -128,24 +129,31 @@ justifyItems: 'center' }}>
 {this.state.items.map((m)=>{
   return(
    
-    <Card key={m.id} style={{borderLeft: '5px dashed red '}} className="card-box mb-4">
-    <div className="card-indicator bg-first" />
-    {m.itemName}
-    <CardContent className="px-4 py-3">
-      <div className="pb-3 d-flex justify-content-between">
-       
-       {m.itemCost}
+    <Card  key={m.id} style={{borderLeft: '5px dashed red ', width: '300px'}} className="card-box mb-4 p-3">
+    <h6 className='text-uppercase'>{m.itemName}</h6> 
+    <div className="d-flex align-items-center pb-2 justify-content-between">
+      <div>
+
       </div>
-      <div className="d-flex align-items-center justify-content-start">
-        <div className="badge badge-primary px-3">Pending?</div>
-        <div className="font-size-sm text-danger px-2">
-         {m.recStatus ? 'true' : 'false'}
-        </div>
-        {m.transactionDate}
+      <p className="ml-2  text-primary">
+     ${m.itemCost}
+
+      </p>
+    </div>
+    <div>
+      
+      <h6 style={{width:'50%'}}  className={m.recStatus ? "badge text-left badge-success ": "badge text-left badge-danger"} >
+      {m.recStatus ? 'Complete' : 'Pending'}
+
+      </h6>
+      <p style={{width:'50%'}} className='text-right'> {moment(m.transactionDate).format('DD/MM/YY')}</p>
+
       </div>
-    </CardContent>
   </Card>
 
+
+
+   
   )
 })}
 
