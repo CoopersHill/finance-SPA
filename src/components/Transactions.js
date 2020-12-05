@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import moment from 'moment'
 import CreateTransactionForm from '../components/crudForm'
 
-import { Grid, Badge, Card, CardContent, CardHeader } from '@material-ui/core';
+import { Grid, Badge, Card, Button, Divider} from '@material-ui/core';
 
 import {sortByNameA, sortByNameZ, sortByCostHighest, sortByCostLowest, sortByStatusFalse, sortByStatusTrue} from '../Functions/sortFunctions'
 import {searchByName} from '../Functions/searchFunctions'
@@ -133,33 +133,37 @@ justifyItems: 'center' }}>
     <h6 className='text-uppercase'>{m.itemName}</h6> 
 
     <Grid container>
-    <Grid style={{width:'50%'}}  item >
-    <h6 className='text-uppercase'>Cost</h6> 
-
+    <Grid style={{width:'50%',borderBottom: '1px dashed black'}} className='text-left' item >
+  <p>  Cost</p>
     </Grid>
-    <Grid style={{width:'50%'}}   item >
+    <Grid style={{width:'50%', borderBottom: '1px dashed black'}} className='text-right'  item >
     <p className="ml-2 text-right text-primary">
      ${m.itemCost}
 
       </p>
     </Grid>
-    <Grid style={{width:'50%'}}  item >
-    <h6  className={m.recStatus ? "badge text-left badge-success ": "badge text-left badge-danger"} >
-    {m.recStatus ? 'Complete' : 'Pending'}
-
-    </h6>
+    <Grid style={{width:'50%', borderBottom: '1px dashed black'}} className='text-left' item >
+    Date
     </Grid>
-    <Grid style={{width:'50%'}}  item >
-    <Grid  item >
+    <Grid style={{width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
     <p className='text-right'> {moment(m.transactionDate).format('DD/MM/YY')}</p>
 
     </Grid>
+   <Grid style={{width:'50%',borderBottom: '1px dashed #212121'}} className='text-left' item >
+    Status
+    </Grid>
+    <Grid style={{width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
+    <h6  className={m.recStatus ? "badge  badge-success ": "badge badge-danger"} >
+    {m.recStatus ? 'Complete' : 'Pending'}
+
+    </h6>
+
     </Grid>
     
    </Grid> 
 
-    
-      
+
+    <Button variant="outlined" color="primary">update</Button><Button variant="outlined" color="secondary">delete</Button>  
     
   </Card>
 
