@@ -4,8 +4,10 @@ import CreateTransactionForm from '../components/crudForm'
 import FilterCard from '../components/FilterCard'
 
 import { Grid, Badge, Card, Button, Divider} from '@material-ui/core';
-
-import {sortByNameA, sortByNameZ, sortByCostHighest, sortByCostLowest, sortByStatusFalse, sortByStatusTrue} from '../Functions/sortFunctions'
+import{filterByName} from '../Functions/filterFunctions'
+import {sortByNameA, 
+  sortByNameZ, sortByCostHighest, 
+  sortByCostLowest, sortByStatusFalse, sortByStatusTrue} from '../Functions/sortFunctions'
 import {searchByName} from '../Functions/searchFunctions'
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
 
@@ -77,11 +79,20 @@ this.setState({
 })
 }
 
-handleFilterForm = (arr)=>{
+handleFilter = (value)=>{
+  console.log('value', value)
 this.setState({
-  items: arr
+  searchTerm: value
 })
 }
+performNamefilter = ()=>{
+console.log(  filterByName(this.state.items, this.state.searchTerm)
+)  
+  this.setState({
+    items: filterByName(this.state.items, this.state.searchTerm)
+  
+  })
+  }
 
 handleSearch = (value)=>{
   this.setState({
@@ -89,8 +100,8 @@ handleSearch = (value)=>{
   })
 }
 performSearch = ()=>{
-console.log(searchByName(this.state.items, this.state.searchTerm)
-)
+searchByName(this.state.items, this.state.searchTerm)
+
 this.setState({
   items: searchByName(this.state.items, this.state.searchTerm)
 
@@ -130,13 +141,10 @@ render(){
    
         <Grid container >
         <Grid item className='text-center' >
+        create transaction
+        <CreateTransactionForm/>
         
-        <FilterCard
-        handleSearch={this.handleSearch} performSearch={this.performSearch}
-         items={this.state.items} status={this.state.status} searchTerm={this.state.status}  alpha={this.state.alpha} omega={this.state.omega}/>
-      <br></br>
-      sort card
-        
+      
         </Grid>
     
         <Grid item className='text-center' >

@@ -17,7 +17,7 @@ const [omega, setOmega] = useState('')
 
 <Card>
 
-<ItemNameForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={props.handleSearch}  performSearch={props.performSearch} />
+<ItemNameForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleFilter={props.handleFilter}  performNameFilter={props.performNameFilter} />
 <CostRangeForms/>
 
 
@@ -40,8 +40,8 @@ const [omega, setOmega] = useState('')
 form
 <form onSubmit={(e)=>{
 e.preventDefault()
-props.handleSearch(props.searchTerm)
-props.performSearch()
+props.handleFilter(props.searchTerm)
+props.performNameFilter()
 }}>
 
 <TextField
@@ -57,8 +57,8 @@ onChange={(e)=>{
 name='itemName'
 onClick={(e)=>{
     e.preventDefault()
-    
-    props.performSearch()
+    props.handleFilter(props.searchTerm)
+props.performNameFilter()
 }}
 >
 search
