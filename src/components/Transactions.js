@@ -182,7 +182,7 @@ justifyItems: 'center' }}>
     Date
     </Grid>
     <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
-    <p className='text-right'> {moment(m.transactionDate).format('DD/MM/YY')}</p>
+    <p className='text-right'> {moment(m.transactionDate).format('Do MM, YYYY')}</p>
 
     </Grid>
    <Grid style={{height:'1.5rem', width:'50%',borderBottom: '1px dashed #212121'}} className='text-left' item >
