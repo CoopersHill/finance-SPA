@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import moment from 'moment'
 import CreateTransactionForm from '../components/crudForm'
 
 import { Grid, Badge, Card, CardContent } from '@material-ui/core';
@@ -96,15 +96,16 @@ render(){
 
     return(
         <div>
-        <Badge>          projectedBalanceCalc ${this.state.projectedBalanceTotal},
+        <Badge className=' badge badge-pill bg-dark text-success p-2 m-2'>      
+             ${this.state.projectedBalanceTotal} projected  Total
         </Badge>
-        <Badge>
-        pendingTransactionsCalc {this.state.pendingTransactionsTotal},
+        <Badge className=' badge badge-pill bg-dark text-success p-2 m-2'>
+         ${this.state.pendingTransactionsTotal} pending Transactions
         
         </Badge>          
         
-        <Badge className=' badge badge-pill bg-dark text-danger'>
-        actualTransactionsCalc {this.state.actualTransactionsTotal}
+        <Badge className=' badge badge-pill bg-dark text-success p-2 m-2'>
+         ${this.state.actualTransactionsTotal} actual Total
         
         </Badge>
     
@@ -132,14 +133,15 @@ justifyItems: 'center' }}>
     {m.itemName}
     <CardContent className="px-4 py-3">
       <div className="pb-3 d-flex justify-content-between">
-       {m.id}
-       {m.itemName}
+       
+       {m.itemCost}
       </div>
       <div className="d-flex align-items-center justify-content-start">
-        <div className="badge badge-primary px-3">On Hold</div>
+        <div className="badge badge-primary px-3">Pending?</div>
         <div className="font-size-sm text-danger px-2">
-         {m.itemCost}
+         {m.recStatus ? 'true' : 'false'}
         </div>
+        {m.transactionDate}
       </div>
     </CardContent>
   </Card>
