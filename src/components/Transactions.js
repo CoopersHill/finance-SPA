@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import moment from 'moment'
 import CreateTransactionForm from '../components/crudForm'
 
-import { Grid, Badge, Card, CardContent } from '@material-ui/core';
+import { Grid, Badge, Card, CardContent, CardHeader } from '@material-ui/core';
 
 import {sortByNameA, sortByNameZ, sortByCostHighest, sortByCostLowest, sortByStatusFalse, sortByStatusTrue} from '../Functions/sortFunctions'
 import {searchByName} from '../Functions/searchFunctions'
@@ -131,24 +131,36 @@ justifyItems: 'center' }}>
    
     <Card  key={m.id} style={{borderLeft: '5px dashed red ', width: '300px'}} className="card-box mb-4 p-3">
     <h6 className='text-uppercase'>{m.itemName}</h6> 
-    <div className="d-flex align-items-center pb-2 justify-content-between">
-      <div>
 
-      </div>
-      <p className="ml-2  text-primary">
+    <Grid container>
+    <Grid style={{width:'50%'}}  item >
+    <h6 className='text-uppercase'>Cost</h6> 
+
+    </Grid>
+    <Grid style={{width:'50%'}}   item >
+    <p className="ml-2 text-right text-primary">
      ${m.itemCost}
 
       </p>
-    </div>
-    <div>
+    </Grid>
+    <Grid style={{width:'50%'}}  item >
+    <h6  className={m.recStatus ? "badge text-left badge-success ": "badge text-left badge-danger"} >
+    {m.recStatus ? 'Complete' : 'Pending'}
+
+    </h6>
+    </Grid>
+    <Grid style={{width:'50%'}}  item >
+    <Grid  item >
+    <p className='text-right'> {moment(m.transactionDate).format('DD/MM/YY')}</p>
+
+    </Grid>
+    </Grid>
+    
+   </Grid> 
+
+    
       
-      <h6 style={{width:'50%'}}  className={m.recStatus ? "badge text-left badge-success ": "badge text-left badge-danger"} >
-      {m.recStatus ? 'Complete' : 'Pending'}
-
-      </h6>
-      <p style={{width:'50%'}} className='text-right'> {moment(m.transactionDate).format('DD/MM/YY')}</p>
-
-      </div>
+    
   </Card>
 
 
