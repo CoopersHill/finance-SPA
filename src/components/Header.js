@@ -3,7 +3,7 @@ import {AppBar} from '@material-ui/core'
 const Header =()=>{
     return(
 <AppBar style={{backgroundColor: 'blueviolet'}}>
-<h3>Finance app</h3>
+<h3>Enterprise Finance Tracker</h3>
 </AppBar>
     )
 }

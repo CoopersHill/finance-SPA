@@ -122,16 +122,16 @@ render(){
 
     return(
         <div>
-        searchterm: {this.state.searchTerm}
-        Projected Balance: <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525', color: 'green'}}>      
+
+        Projected Balance: <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525', color: 'white'}}>      
             ${this.state.projectedBalanceTotal} 
         </Badge>
-        Pending Transactions Total : <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'green'}}>
+        Pending Transactions Total : <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'white'}}>
          ${this.state.pendingTransactionsTotal} 
         
         </Badge>          
         
-        Actual Balance:   <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'green'}}>
+        Completed Transactions Total:   <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'white'}}>
    ${this.state.actualTransactionsTotal} 
         
         </Badge>
@@ -151,7 +151,7 @@ render(){
         
   
 <div  style={{
-  border: '2px solid red ',
+
 
   display: 'flex', 
 flexDirection: 'column', 

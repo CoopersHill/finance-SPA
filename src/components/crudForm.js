@@ -20,10 +20,6 @@ const CreateTransactionForm =()=>{
     const [itemCost, setItemCost] = useState(0)
 
 
-
-
-
-
 const postTransaction = ()=>{
     let transactionObject = {
         itemName: itemName,
@@ -46,7 +42,7 @@ const postTransaction = ()=>{
 
     return(
        
-        <Card style={{border: ' 5px solid green'}} className="card-box mb-4">
+        <Card  className="card-box mb-4">
         <CardContent className="px-4 py-3">
          
         <TextField
@@ -80,6 +76,7 @@ value={itemCost}
 onClick={(e)=>{
 e.preventDefault()
 postTransaction()
+window.location.assign('/')
 }}
 >
 post transaction
