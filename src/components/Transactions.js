@@ -96,16 +96,16 @@ render(){
 
     return(
         <div>
-        <Badge className=' badge badge-pill bg-dark text-success p-2 m-2'>      
-             ${this.state.projectedBalanceTotal} projected  Total
+        Projected Balance: <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525', color: 'green'}}>      
+            ${this.state.projectedBalanceTotal} 
         </Badge>
-        <Badge className=' badge badge-pill bg-dark text-success p-2 m-2'>
-         ${this.state.pendingTransactionsTotal} pending Transactions
+        Pending Transactions Total : <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'green'}}>
+         ${this.state.pendingTransactionsTotal} 
         
         </Badge>          
         
-        <Badge className=' badge badge-pill bg-dark text-success p-2 m-2'>
-         ${this.state.actualTransactionsTotal} actual Total
+        Actual Balance:   <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'green'}}>
+   ${this.state.actualTransactionsTotal} 
         
         </Badge>
     
@@ -129,31 +129,32 @@ justifyItems: 'center' }}>
 {this.state.items.map((m)=>{
   return(
    
-    <Card  key={m.id} style={{borderLeft: '5px dashed red ', width: '300px'}} className="card-box mb-4 p-3">
+    <Card  key={m.id} style={m.recStatus ? {borderLeft: '5px dashed green ', width: '300px'} : {borderLeft: '5px dashed yellow ', width: '300px'} } className="card-box m-2 p-3">
     <h6 className='text-uppercase'>{m.itemName}</h6> 
 
     <Grid container>
-    <Grid style={{width:'50%',borderBottom: '1px dashed black'}} className='text-left' item >
+    
+    <Grid style={{height:'1.5rem', width:'50%',borderBottom: '1px dashed black'}} className='text-left' item >
   <p>  Cost</p>
     </Grid>
-    <Grid style={{width:'50%', borderBottom: '1px dashed black'}} className='text-right'  item >
-    <p className="ml-2 text-right text-primary">
+    <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed black'}} className='text-right'  item >
+    <p className="text-right text-primary">
      ${m.itemCost}
 
       </p>
     </Grid>
-    <Grid style={{width:'50%', borderBottom: '1px dashed black'}} className='text-left' item >
+    <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed black'}} className='text-left' item >
     Date
     </Grid>
-    <Grid style={{width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
+    <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
     <p className='text-right'> {moment(m.transactionDate).format('DD/MM/YY')}</p>
 
     </Grid>
-   <Grid style={{width:'50%',borderBottom: '1px dashed #212121'}} className='text-left' item >
+   <Grid style={{height:'1.5rem', width:'50%',borderBottom: '1px dashed #212121'}} className='text-left' item >
     Status
     </Grid>
-    <Grid style={{width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
-    <h6  className={m.recStatus ? "badge  badge-success ": "badge badge-danger"} >
+    <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
+    <h6  className={m.recStatus ? "badge  badge-success ": "badge badge-warning"} >
     {m.recStatus ? 'Complete' : 'Pending'}
 
     </h6>
@@ -162,8 +163,10 @@ justifyItems: 'center' }}>
     
    </Grid> 
 
+<div className='mt-2'>
+<Button variant="outlined" color="primary">update</Button><Button variant="outlined" color="secondary">delete</Button>  
 
-    <Button variant="outlined" color="primary">update</Button><Button variant="outlined" color="secondary">delete</Button>  
+</div>
     
   </Card>
 
