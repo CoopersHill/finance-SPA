@@ -6,7 +6,7 @@
 
 // projected balance
 export const projectedBalanceCalc = (arr)=>{
-    let projectedCosts = []
+    let projectedCosts = [0]
     
     arr.map((m)=>{
    projectedCosts.push(m.itemCost)
@@ -26,7 +26,7 @@ export const projectedBalanceCalc = (arr)=>{
 
 // pending balance
 export const pendingTransactionsCalc = (arr)=>{
-    let pendingTransactions =[]
+    let pendingTransactions =[0]
     
 let array = arr.filter((f)=>{
     return f.recStatus === false
@@ -62,7 +62,7 @@ return pendingTransactionsReduced = 0
   
 // actual balance
   export const actualTransactionsCalc = (arr)=>{
-    let actualTransactions =[]
+    let actualTransactions =[0]
     
     let array = arr.filter((f)=>{
         return f.recStatus === true

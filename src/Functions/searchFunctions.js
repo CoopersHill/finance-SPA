@@ -16,3 +16,6 @@ export const searchByCost =(arr, searchTerm)=>{
     console.log('filtered', filtered)
     return filtered
 }
+const searchBydate = (arr, searchDate)=>{
+    return arr
+}

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import moment from 'moment'
 import CreateTransactionForm from '../components/crudForm'
+import FilterCard from '../components/FilterCard'
 
 import { Grid, Badge, Card, Button, Divider} from '@material-ui/core';
 
@@ -14,16 +15,24 @@ class Transactions extends React.Component {
 constructor(props){
 super(props)
     this.state = {
+      itemName: '',
+      itemCost: '',
+      recStatus: '',
+      transactionDate: '',
       projectedBalanceTotal: null,
        pendingTransactionsTotal: null, 
        actualTransactionsTotal: null,
         accountBalance: 1000000000,  
         searchTerm: '',
+        status: '',
+        alpha: '',
+        omega: '',
         items: []
     }
     
     this.sortbyproperty = this.sortbyproperty.bind(this)
     this.performSearch = this.performSearch.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
 }
 
 
@@ -33,16 +42,15 @@ componentDidMount(){
     .then(response => response.json())
     .then((data) =>{
        
-      sortByStatusFalse(data)
-      sortByStatusTrue(data)
+      let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
 
       this.setState({
             items: data,
-            projectedBalanceTotal: projectedBalanceCalc(data) / 100, 
-            pendingTransactionsTotal: pendingTransactionsCalc(data) /100, 
-            actualTransactionsTotal: actualTransactionsCalc(data) /100
+            projectedBalanceTotal: projectedBalanceCalc(realData) / 100, 
+            pendingTransactionsTotal: pendingTransactionsCalc(realData) /100, 
+            actualTransactionsTotal: actualTransactionsCalc(realData) /100
         })
-        console.log(data)
+        console.log('real data', realData)
     })
 }
 
@@ -69,13 +77,20 @@ this.setState({
 })
 }
 
-handleSearch = (e)=>{
+handleFilterForm = (arr)=>{
+this.setState({
+  items: arr
+})
+}
+
+handleSearch = (value)=>{
   this.setState({
-    searchTerm: e.target.value 
+    searchTerm: value 
   })
 }
 performSearch = ()=>{
-searchByName(this.state.items, this.state.searchTerm)
+console.log(searchByName(this.state.items, this.state.searchTerm)
+)
 this.setState({
   items: searchByName(this.state.items, this.state.searchTerm)
 
@@ -96,6 +111,7 @@ render(){
 
     return(
         <div>
+        searchterm: {this.state.searchTerm}
         Projected Balance: <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525', color: 'green'}}>      
             ${this.state.projectedBalanceTotal} 
         </Badge>
@@ -108,16 +124,27 @@ render(){
    ${this.state.actualTransactionsTotal} 
         
         </Badge>
-    
-        <Grid container >
 
+      
+   
+   
+        <Grid container >
+        <Grid item className='text-center' >
+        
+        <FilterCard
+        handleSearch={this.handleSearch} performSearch={this.performSearch}
+         items={this.state.items} status={this.state.status} searchTerm={this.state.status}  alpha={this.state.alpha} omega={this.state.omega}/>
+      <br></br>
+      sort card
+        
+        </Grid>
     
         <Grid item className='text-center' >
         
   
 <div  style={{
   border: '2px solid red ',
-width: '100vw',
+
   display: 'flex', 
 flexDirection: 'column', 
 flexWrap: 'wrap', 
