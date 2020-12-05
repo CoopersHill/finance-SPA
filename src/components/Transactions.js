@@ -96,37 +96,25 @@ render(){
 
     return(
         <div>
+        <Badge>          projectedBalanceCalc ${this.state.projectedBalanceTotal},
+        </Badge>
+        <Badge>
+        pendingTransactionsCalc {this.state.pendingTransactionsTotal},
+        
+        </Badge>          
+        
+        <Badge className=' badge badge-pill bg-dark text-danger'>
+        actualTransactionsCalc {this.state.actualTransactionsTotal}
+        
+        </Badge>
+    
         <Grid container spacing={4}>
+
         <Grid item>
      
         <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-       
+      
         <Card className="card-box mb-4">
-        <div className="card-indicator bg-first" />
-        <CardContent className="px-4 py-3">
-          <div className="pb-3 d-flex justify-content-between">
-
-
-</div>
-          <div className="d-flex align-items-center justify-content-start">
-            <div className="badge badge-primary px-3">On Hold</div>
-            <div className="font-size-sm text-danger px-2">
-              balances <p>          projectedBalanceCalc ${this.state.projectedBalanceTotal},
-              </p>
-              <p>
-              pendingTransactionsCalc {this.state.pendingTransactionsTotal},
-              
-              </p>          
-              
-              <p>
-              actualTransactionsCalc {this.state.actualTransactionsTotal}
-              
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      <Card className="card-box mb-4">
       <div className="card-indicator bg-first" />
       <CardContent className="px-4 py-3">
         <div className="pb-3 d-flex justify-content-between">
@@ -155,23 +143,16 @@ this.performSearch()
         </div>
       </CardContent>
     </Card>
+    
     <Card className="card-box mb-4">
-    <div className="card-indicator bg-first" />
-    <CardContent className="px-4 py-3">
-      <div className="pb-3 d-flex justify-content-between">
-      filters 
-      </div>
-      <div className="d-flex align-items-center justify-content-start">
-        <div className="font-size-sm text-danger px-2">
-
-
-        <CreateTransactionForm/>
-
-         
-        </div>
-      </div>
-    </CardContent>
+   
+      <CreateTransactionForm/>
+    
+      
+ 
   </Card>
+
+    
 
         </div>
      
