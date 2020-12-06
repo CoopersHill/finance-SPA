@@ -1,9 +1,26 @@
 # Getting Started with Create React App
 *******IMPORTANT NOTE********
-WHEN YOU PULL DOWN OR CLONE THIS REPO, MAKE SURE TO RUN 
+THIS PROJECT USES YARN AND NOT NPM.SO...
+1.
+A make sure you have yarn installed.
+run
+yarn -v
+in the terminal.
+
+IF IT IS ABSENT:
+1.B 
+run
+npm install -g yarn
+
+
+2. WITH YARN INSTALLED:
+
+IN ORDER TO GET THE NEEDED DEPENDENCIES, MAKE SURE TO RUN 
 yarn install
-IN ORDER TO GET THE NEEDED DEPENDENCIES.
-THIS PROJECT USES YARN AND NOT NPM. HOWEVER, THE YARN INSTALL COMMAND COMES FIRST JUST LIKE WITH YARN.
+
+THIS WILL GRAB THE DEPENDENCIES NEEDED
+
+3. RELAX AND ENJOY THE REPO
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
