@@ -1,22 +1,97 @@
 import React from 'react'
+import {sortByNameA, 
+    sortByNameZ, sortByCostHighest, 
+    sortByCostLowest, sortByStatusFalse, sortByStatusTrue, sortByDateNewest, sortByDateOldest} from '../Functions/sortFunctions'
+
+    import { Grid, Badge, Card, Button, Divider} from '@material-ui/core';
 
 
-const SortCard =()=>{
-
+const SortCard =(props)=>{
+let items = props.items
     return (
 
         <div>
-        <button> sort cost low</button>
- <button> sort date low</button>
- <button> sort sort name alpha</button>
- <button> sort status true first</button>
+        
+        <Card>
+        <Grid>
 
- <button> sort cost high</button>
- <button> sort date high</button>
- <button> sort sort name omega</button>
- <button> sort status true last</button>
+        <Grid style={{width: '50%'}}>
+       
+ <button
+ onClick={()=>{
+    props.handleItemsChange(sortByCostLowest(props.items))
+}}
+ > sort cost low</button>
+
+
+        </Grid>
+        <Grid style={{width: '50%'}}>
+        <button
+        onClick={()=>{
+           props.handleItemsChange(sortByCostHighest(props.items))
+       }}
+        > sort cost high</button>
+        </Grid>
+        <Grid style={{width: '50%'}}>
+ <button
+ onClick={()=>{
+    props.handleItemsChange(sortByNameA(props.items))
+}}
+ > sort sort name alpha
+ </button>
+
+        </Grid>
+        <Grid style={{width: '50%'}}>
+
+        <button
+        onClick={()=>{
+            props.handleItemsChange(sortByNameZ(props.items))
+           
+       }}
+        > sort sort name omega</button>
+                
+        </Grid>
+        <Grid style={{width: '50%'}}>
+        <button
+        onClick={()=>{
+           props.handleItemsChange(sortByStatusTrue(props.items))
+       }}
+        > sort status true first</button>
+        
+        </Grid>
+        <Grid style={{width: '50%'}}>
+        <button
+        onClick={()=>{
+           props.handleItemsChange(sortByStatusFalse(props.items))
+       }}
+        > sort status true last</button>
+        
+        </Grid>
+        <Grid style={{width: '50%'}}>
+ <button
+ onClick={()=>{
+    props.handleItemsChange(sortByDateNewest(props.items))
+}}
+ > sort date newest</button>
  
+        </Grid>
+        <Grid style={{width: '50%'}}>
+        <button
+        onClick={()=>{
+           props.handleItemsChange(sortByDateOldest(props.items))
+       }}
+        > sort date oldest</button>
+               
+        </Grid>
+        </Grid>
+        </Card>
+        
+
+
+
         </div>
     )
 }
  
+
+export default SortCard
