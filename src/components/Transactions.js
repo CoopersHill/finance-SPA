@@ -86,13 +86,8 @@ render(){
         </Badge>  
    
         <Grid container >
-        <Grid item className='text-center' >
-        <FilterCard handleItemsChange={this.handleItemsChange} items={this.state.staticItems}/>
-        <CreateTransactionForm/>
-
-
-        <SortCard items={this.state.staticItems} handleItemsChange={this.handleItemsChange}   />
-      
+        <Grid item className='text-center' style={{color: 'white', width: '35vw'}} >
+        filters, create and sort will go here
         </Grid>
     
         <Grid item className='text-center' >
