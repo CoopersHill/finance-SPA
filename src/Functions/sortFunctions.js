@@ -1,6 +1,8 @@
 // input a string representing the sort type
 // input an array to sort
 
+import moment from 'moment'
+
 export const sortByNameA = (arr)=>{
 let alpha = arr.sort((a, b)=>{
     var nameA = a.itemName.toUpperCase(); // ignore upper and lowercase
@@ -96,3 +98,39 @@ export const sortByCostLowest = (arr)=>{
 
 
    // sort date high and low
+   export const sortByDateNewest = (arr)=>{
+    let alpha = arr.sort((a, b)=>{
+
+      if (a.transactionDate < b.transactionDate) {
+        return -1;
+      }
+      if (a.transactionDate > b.transactionDate) {
+        return 1;
+      }
+    
+      // names must be equal
+      return 0;
+    })
+  
+    console.log('newest date', alpha)
+
+  return alpha
+   }
+   export const sortByDateOldest = (arr)=>{
+    let alpha = arr.sort((a, b)=>{
+
+      if (moment(a.transactionDate).isBefore(b.transactionDate)) {
+        return -1;
+      }
+      if (moment(a.transactionDate).isAfter(b.transactionDate)) {
+        return 1;
+      }
+    
+      // names must be equal
+      return 0;
+    })
+  
+    console.log('oldest date', alpha)
+
+  return alpha
+   }

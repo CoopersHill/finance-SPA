@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import moment from 'moment'
 import CreateTransactionForm from '../components/crudForm'
 import FilterCard from '../components/FilterCard'
-
+import SortCard from '../components/SortCard'
 import { Grid, Badge, Card, Button, Divider} from '@material-ui/core';
-import{filterByName} from '../Functions/filterFunctions'
+
 import {sortByNameA, 
   sortByNameZ, sortByCostHighest, 
   sortByCostLowest, sortByStatusFalse, sortByStatusTrue} from '../Functions/sortFunctions'
@@ -29,12 +29,13 @@ super(props)
         status: '',
         alpha: '',
         omega: '',
-        items: []
+        items: [],
+        staticItems: []
     }
     
-    this.sortbyproperty = this.sortbyproperty.bind(this)
-    this.performSearch = this.performSearch.bind(this)
-    this.handleSearch = this.handleSearch.bind(this)
+    this.handleItemsChange = this.handleItemsChange.bind(this)
+
+ 
 }
 
 
@@ -48,6 +49,7 @@ componentDidMount(){
 
       this.setState({
             items: data,
+            staticItems: data,
             projectedBalanceTotal: projectedBalanceCalc(realData) / 100, 
             pendingTransactionsTotal: pendingTransactionsCalc(realData) /100, 
             actualTransactionsTotal: actualTransactionsCalc(realData) /100
@@ -56,66 +58,13 @@ componentDidMount(){
     })
 }
 
-sortbyproperty=(sortType)=>{
-  let items
-if(sortType === 'nameHighest'){
-items = sortByNameA(this.state.items)
-console.log('sortAlpha', sortByNameA(this.state.items))
-}else if (sortType === 'nameLowest'){
-  items = sortByNameZ(this.state.items)
-  console.log('sortBeta', sortByNameZ(this.state.items))
-
-}else if(sortType === 'costHighest'){
-  items = sortByCostHighest(this.state.items)
-  console.log('sortAlpha', sortByCostHighest(this.state.items))
-  }else if (sortType === 'costLowest'){
-    items = sortByCostLowest(this.state.items)
-    console.log('sortBeta', sortByCostLowest(this.state.items))
-  
-  }
-
+handleItemsChange=(value)=>{
 this.setState({
-  items: items
+  items: value
 })
-}
 
-handleFilter = (value)=>{
-  console.log('value', value)
-this.setState({
-  searchTerm: value
-})
+console.log('new items', value)
 }
-performNamefilter = ()=>{
-console.log(  filterByName(this.state.items, this.state.searchTerm)
-)  
-  this.setState({
-    items: filterByName(this.state.items, this.state.searchTerm)
-  
-  })
-  }
-
-handleSearch = (value)=>{
-  this.setState({
-    searchTerm: value 
-  })
-}
-performSearch = ()=>{
-searchByName(this.state.items, this.state.searchTerm)
-
-this.setState({
-  items: searchByName(this.state.items, this.state.searchTerm)
-
-})
-}
-searchbyproperty=(searchbyProp)=>{
-  if(searchbyProp === 'name'){
-  // sort function
-  }else if (searchbyProp === 'amount'){
-  // sort function
-  }
-  
-  
-  }
 
 
 render(){
@@ -134,17 +83,11 @@ render(){
         Completed Transactions Total:   <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'white'}}>
    ${this.state.actualTransactionsTotal} 
         
-        </Badge>
-
-      
-   
+        </Badge>  
    
         <Grid container >
-        <Grid item className='text-center' >
-        create transaction
-        <CreateTransactionForm/>
-        
-      
+        <Grid item className='text-center' style={{color: 'white', width: '35vw'}} >
+        filters, create and sort will go here
         </Grid>
     
         <Grid item className='text-center' >
@@ -182,7 +125,7 @@ justifyItems: 'center' }}>
     Date
     </Grid>
     <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed #212121'}} className='text-right' item >
-    <p className='text-right'> {moment(m.transactionDate).format('Do MM, YYYY')}</p>
+    <p className='text-right'> {moment(m.transactionDate).format(' MMM Do, YYYY')}</p>
 
     </Grid>
    <Grid style={{height:'1.5rem', width:'50%',borderBottom: '1px dashed #212121'}} className='text-left' item >
