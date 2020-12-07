@@ -5,63 +5,47 @@
 
 
 // projected balance
-export const projectedBalanceCalc = (arr)=>{
-    let projectedCosts = [0]
+export const allTransactionsTotal = (arr)=>{
+    let projectedCosts = arr.map((m)=>{
+      return   Number(m.itemCost.toFixed(2))
+
+}).reduce((a, b)=>{
+  return a + b
+})
     
-    arr.map((m)=>{
-   projectedCosts.push(m.itemCost)
+ 
     
-      return m.itemCost
-    })
-    
-    let projectedBalanceReduced =   projectedCosts.reduce((a, b)=>{
-    return  a+b
-    })
-    
-    
-    return projectedBalanceReduced
+    return projectedCosts.toFixed(2)
      }
      
 
 
 // pending balance
 export const pendingTransactionsCalc = (arr)=>{
-    let pendingTransactions =[0]
+   
     
-let array = arr.filter((f)=>{
-    return f.recStatus === false
+let array = arr.map((m)=>{
+    if(m.recStatus===false){
+return Number(m.itemCost)
+    } else {
+      return 0
+    } 
+
+
+})
+let ddw = array.reduce((a, b)=>{
+  return a + b
 })
 
-
-    array.map((m)=>{
-      if(m.recStatus === false){
-       pendingTransactions.push(m.itemCost)
-      }    
-        return m
-      })
-  
-      let pendingTransactionsReduced
-if(pendingTransactions.length > 0){
-return pendingTransactionsReduced =  pendingTransactions.reduce((a, b)=>{
-    return  a+b
-    })
-}else if(pendingTransactions.length < 1){
-return pendingTransactionsReduced = 0
-}
-
-    
-
-      
-
-            return pendingTransactionsReduced
+return ddw.toFixed(2)
 
 
   }
 
 
   
-// actual balance
-  export const actualTransactionsCalc = (arr)=>{
+// completed balance
+  export const completedTransactionsTotal = (arr)=>{
     let actualTransactions =[0]
     
     let array = arr.filter((f)=>{
@@ -77,9 +61,9 @@ return pendingTransactionsReduced = 0
       })
   
     let actualTransactionsReduced = actualTransactions.reduce((a, b)=>{
-      return  a+b
+      return  a + b
       })
 
    
-      return actualTransactionsReduced
+      return actualTransactionsReduced.toFixed(2)
   }

@@ -9,7 +9,7 @@ import {sortByNameA,
   sortByNameZ, sortByCostHighest, 
   sortByCostLowest, sortByStatusFalse, sortByStatusTrue} from '../Functions/sortFunctions'
 import {searchByName} from '../Functions/searchFunctions'
-import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
+import {allTransactionsTotal, pendingTransactionsCalc, completedTransactionsTotal} from '../Functions/balanceCalcs'
 
 
 
@@ -21,10 +21,9 @@ super(props)
       itemCost: '',
       recStatus: '',
       transactionDate: '',
-      projectedBalanceTotal: null,
-       pendingTransactionsTotal: null, 
-       actualTransactionsTotal: null,
-        accountBalance: 1000000000,  
+      allTransactions: 0,
+       pendingTransactionsTotal: 0, 
+       completedTransactions: 0,
         searchTerm: '',
         status: '',
         alpha: '',
@@ -46,15 +45,17 @@ componentDidMount(){
     .then((data) =>{
        
       let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
+let ddw = allTransactionsTotal(realData)  
 
       this.setState({
             items: data,
             staticItems: data,
-            projectedBalanceTotal: projectedBalanceCalc(realData) / 100, 
-            pendingTransactionsTotal: pendingTransactionsCalc(realData) /100, 
-            actualTransactionsTotal: actualTransactionsCalc(realData) /100
+            allTransactions: allTransactionsTotal(realData) , 
+            pendingTransactionsTotal: pendingTransactionsCalc(realData), 
+            completedTransactions: completedTransactionsTotal(realData)
         })
         console.log('real data', realData)
+        console.log('ddw', ddw)
     })
 }
 
@@ -73,7 +74,7 @@ render(){
         <div>
 
         Projected Balance: <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525', color: 'white'}}>      
-            ${this.state.projectedBalanceTotal} 
+            ${this.state.allTransactions} 
         </Badge>
         Pending Transactions Total : <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'white'}}>
          ${this.state.pendingTransactionsTotal} 
@@ -81,7 +82,7 @@ render(){
         </Badge>          
         
         Completed Transactions Total:   <Badge className=' badge badge-pill bg-secondary p-2 m-2' style={{backgroundColor: '#252525',color: 'white'}}>
-   ${this.state.actualTransactionsTotal} 
+   ${this.state.completedTransactions} 
         
         </Badge>  
    
