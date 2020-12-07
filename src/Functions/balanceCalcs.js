@@ -25,7 +25,7 @@ export const pendingTransactionsCalc = (arr)=>{
    
     
 let array = arr.map((m)=>{
-    if(m.recStatus===false){
+    if(m.recStatus ===false){
 return Number(m.itemCost)
     } else {
       return 0
