@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 
-import { Grid, Badge, Card,FormControl, Checkbox, TextField, Button, Divider} from '@material-ui/core';
+import { Card, TextField } from '@material-ui/core';
 import{filterByName, filterByStatus, filterByCost} from '../Functions/filterFunctions'
 
 
-const FilterCard =(props)=>{
+const FilterCard = (props)=>{
 
 const [alpha, setAlpha] = useState('')
 const [omega, setOmega] = useState('')
