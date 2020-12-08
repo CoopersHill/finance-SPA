@@ -1,8 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Transactions from './components/Transactions'
 import Header from './components/Header'
-
+import AccountManagement from './components/accountManagement'
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
    <Header/>
    <br></br>
    <br></br>
-    <Transactions/>
+    <AccountManagement/>
     </div>
   );
 }
