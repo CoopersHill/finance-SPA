@@ -11,7 +11,7 @@ function App() {
    <br></br>
    <br></br>
     <AccountManagement/>
-    <Transactions/>
+   
 
     </div>
   );
