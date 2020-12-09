@@ -19,3 +19,12 @@ export const searchByCost =(arr, searchTerm)=>{
 const searchBydate = (arr, searchDate)=>{
     return arr
 }
+
+
+searchByIDTransaction=(id)=>{
+    fetch(`https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions/${id}`)
+    .then(response => response.json())
+    .then((data)=>{
+        console.log(data)
+    })
+}
