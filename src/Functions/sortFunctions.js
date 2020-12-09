@@ -58,7 +58,7 @@ export const sortByCostLowest = (arr)=>{
    }
 
 
-   export const sortByStatusFalse = (arr)=>{
+   export const sortByStatusTrue = (arr)=>{
     let alpha = arr.sort((a, b)=>{
 
       if (a.recStatus > b.recStatus) {
@@ -77,7 +77,7 @@ export const sortByCostLowest = (arr)=>{
    }
 
 
-   export const sortByStatusTrue = (arr)=>{
+   export const sortByStatusFalse = (arr)=>{
     let alpha = arr.sort((a, b)=>{
 
       if (a.recStatus < b.recStatus) {
@@ -118,11 +118,10 @@ export const sortByCostLowest = (arr)=>{
    }
    export const sortByDateOldest = (arr)=>{
     let alpha = arr.sort((a, b)=>{
-
-      if (moment(a.transactionDate).isBefore(b.transactionDate)) {
+      if (a.transactionDate > b.transactionDate) {
         return -1;
       }
-      if (moment(a.transactionDate).isAfter(b.transactionDate)) {
+      if (a.transactionDate < b.transactionDate) {
         return 1;
       }
     

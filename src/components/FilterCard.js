@@ -17,12 +17,19 @@ const [costForm, toggleCostForm] = useState(false)
 
     return(
 <div>
-<Card>
-
-filter toggle buttons go here
+<Card style={{border: '2px solid black'}}>
+<button
+onClick={()=>{
+    props.handleItemsChange(props.items)
+}}
+>
+RESET LIST
+</button>
 <button
 onClick={()=>{
     toggleNameForm(!nameForm)
+    toggleStatusForm(false)
+    toggleCostForm(false)
 }}
 >
 filter by name
@@ -31,7 +38,8 @@ filter by name
 <button
 onClick={()=>{
     toggleStatusForm(!statusForm)
-}}
+    toggleNameForm(false)
+    toggleCostForm(false)}}
 >
 filter by status
 </button>
@@ -39,6 +47,9 @@ filter by status
 <button
 onClick={()=>{
     toggleCostForm(!costForm)
+    toggleNameForm(false)
+    toggleStatusForm(false)
+
 }}
 >
 filter by range of costs
@@ -47,7 +58,7 @@ filter by range of costs
 </Card>
 
 <Card>
-<div > Name form
+<div >
 {nameForm 
     ?
     <ItemNameForm handleItemsChange={props.handleItemsChange} items={props.items}/>
@@ -57,13 +68,13 @@ filter by range of costs
 
 </div>
 
-<div> Status form
+<div> 
 {
     statusForm ? <RecStatusForm handleItemsChange={props.handleItemsChange} items={props.items} /> :<p></p>
 }
 
 </div>
-<div > Cost form
+<div >
 {costForm 
     ?
     <CostRangeForms handleItemsChange={props.handleItemsChange} items={props.items}/>
@@ -73,7 +84,7 @@ filter by range of costs
 
 </div>
 
-filterForms go here
+
 
 
 </Card>
@@ -97,8 +108,9 @@ filterForms go here
 e.preventDefault()
 props.handleItemsChange(filterByName(props.items, searchTerm))
 }}>
-searching for: {searchTerm}
+<h6>FILTER BY TITLE</h6>
 <TextField
+placeholder='TITLE'
 variant='outlined'
 onChange={(e)=>{
 e.preventDefault()
@@ -106,11 +118,12 @@ setSearchTerm(e.target.value)
 }}
 
 />
+<hr></hr>
 <button
 name='itemName'
 
 >
-search
+FILTER
 </button>
 
 
@@ -127,7 +140,9 @@ search
     
     return(
         <div>
-        form {recStatus}
+        <h6>
+        FILTER BY STATUS
+        </h6>
     
 <button
 name='recStatus'
@@ -164,38 +179,48 @@ pending
     const [alpha, setAlpha] = useState(0)
 const [omega, setOmega] = useState(0)
     
+
+
+
+
     return(
         <div>
-form
 <form
 onSubmit={(e)=>{
 e.preventDefault()
-props.handleItemsChange(filterByCost(props.items, alpha))
-console.log(filterByCost(props.items, alpha))
+
+props.handleItemsChange(filterByCost(props.items, alpha, omega))
+console.log(filterByCost(props.items, alpha, omega))
 }}
 >
-
-<TextField 
-label={alpha}
+<h6>COST FILTER</h6>
+<input 
+placeholder='MINIMUM'
+min='.01'
+required={true}
+step='.01'
 type='number'
 onChange={(e)=>{
     setAlpha(e.target.value)
     console.log(alpha)
 }}
-variant='outlined'/>
-<TextField 
+/>
+<input
+placeholder='MAXIMUM'
+min='.01'
+step='.01'
 type='number'
-label={omega}
+required={true}
 onChange={(e)=>{
     setOmega(e.target.value)
 }}
-variant='outlined'/>
+/>
 
-
+<hr></hr>
 <button
 
 >
-cost range
+Filter
 </button>
 
 </form>
