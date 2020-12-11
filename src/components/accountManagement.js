@@ -47,7 +47,6 @@ render(){
               <th scope="col">#</th>
               <th scope="col">Account</th>
               <th scope="col">Balance</th>
-              <th scope="col">---</th>
 
               <th scope="col">Reconciled</th>
             </tr>
@@ -60,7 +59,7 @@ render(){
             return(
                 <tr key={m.id}>
                 <td>{m.id}</td>
-                <td > <a href='http://www.google.com'>{m.accountDescription}</a>  </td>
+                <td > <a href={`/transactions/${m.accountOwnerId}`}>{m.accountDescription}</a>  </td>
                 <td >{m.accountBalance}</td>
 
                 <td >{m.transactions.length > 0 ? m.transactions.length : 'NO TRANSACTIONS'}</td>
