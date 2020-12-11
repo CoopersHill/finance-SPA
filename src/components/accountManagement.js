@@ -17,7 +17,7 @@ class AccountManagement extends React.Component{
         }
     }
     componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azurewebsites.net/api/BankAccounts')
         .then(response => response.json())
         .then((data) =>{
            
@@ -37,15 +37,19 @@ class AccountManagement extends React.Component{
 render(){
     return(
         <div>
-        <div style={{height: "50vw", width: '75vw', overflow: 'auto'}} className="table-responsive">
-        <table  className="table table-striped table-hover table-bordered mb-4">
+        <CreateAccountForm/> 
+
+        <div className="table-responsive">
+        <table className="table table-striped table-hover table-bordered mb-4">
           <thead className="thead-light">
             <tr>
             
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Account</th>
+              <th scope="col">Balance</th>
+              <th scope="col">---</th>
+
+              <th scope="col">Reconciled</th>
             </tr>
           </thead>
 
@@ -54,20 +58,16 @@ render(){
           
           {this.state.items.map((m)=>{
             return(
-                <tr key={m.id}> 
-                <td >{m.id}</td>
-                <td >{m.title}</td>
-                <td >{m.body}</td>
-                <td >{m.body.length}</td>
+                <tr key={m.id}>
+                <td>{m.id}</td>
+                <td > <a href='http://www.google.com'>{m.accountDescription}</a>  </td>
+                <td >{m.accountBalance}</td>
+
+                <td >{m.transactions.length > 0 ? m.transactions.length : 'NO TRANSACTIONS'}</td>
                 </tr>
             )
         })}
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+            
          
             </tbody>
         </table>
@@ -75,15 +75,11 @@ render(){
 
 
 
-         AccountManagement
+
         
        
-         <CreateAccountForm/> 
+        
 
-         <AccountPage items={this.state.items}  style={{
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}/>
         
         </div>
         
@@ -93,50 +89,7 @@ render(){
 
 }
 
-const AccountPage =(props)=>{
-    return(
-        <div >
-       
 
-        
-        <div style={{display: 'flex', flexDirection: 'column', width:'75vw', overflow:'auto'}}>
-       
-        {
-            props.items.map((m)=>{
-       return (
-          
-          <div key={m.id} className='text-center' style={{width:'100vw', border: '2px dashed black', display: 'flex', flexDirection: 'row'}} >
-          <div  style={{border: '2px solid black', width: '25%' }} className='m-2'>
-<button>
-Transactions
-</button>            
-          </div>
-          <div  style={{border: '2px solid black', width: '25%' }} className='m-2'>
-          <Checkbox style={{width: '3rem'}}/>
-            
-          </div>
-          <div style={{border: '2px solid black', width: '25%' }} className='m-2'>
-          <h6 className='m-2'>Checking</h6>
-          </div>
-          <div style={{border: '2px solid black', width: '25%' }} className='m-2'>
-          <h6 className='m-2'>{m.itemName}</h6>
-          </div>
-          
-          <div style={{border: '2px solid black', width: '25%' }} className='m-2'>
-          <h6 className='m-2'>Balance</h6>
-          </div>
-          
-          </div>
-        
-       )
-            })
-        }
-      
-        </div>
-       
-        </div>
-    )
-}
 
 const CreateAccountForm = () =>{
     let accountObject = {
