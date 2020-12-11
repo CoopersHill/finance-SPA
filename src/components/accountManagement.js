@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { Grid,Checkbox, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
 
+
+
 import allTransactions from '../Functions/apiCall'
 // create account form
 // link to transaction page
@@ -15,7 +17,7 @@ class AccountManagement extends React.Component{
         }
     }
     componentDidMount(){
-        fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
+        fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
         .then((data) =>{
            
@@ -35,6 +37,44 @@ class AccountManagement extends React.Component{
 render(){
     return(
         <div>
+        <div style={{height: "50vw", width: '75vw', overflow: 'auto'}} className="table-responsive">
+        <table  className="table table-striped table-hover table-bordered mb-4">
+          <thead className="thead-light">
+            <tr>
+            
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+          
+          {this.state.items.map((m)=>{
+            return(
+                <tr key={m.id}> 
+                <td >{m.id}</td>
+                <td >{m.title}</td>
+                <td >{m.body}</td>
+                <td >{m.body.length}</td>
+                </tr>
+            )
+        })}
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+         
+            </tbody>
+        </table>
+      </div>
+
+
+
          AccountManagement
         
        
