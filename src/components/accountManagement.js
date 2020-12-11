@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Grid,Checkbox, FormControlLabel, Badge, Card, CardContent, Button, TextField} from '@material-ui/core';
+import { Grid,Checkbox, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
 
 import allTransactions from '../Functions/apiCall'
 // create account form
@@ -10,6 +10,7 @@ class AccountManagement extends React.Component{
     constructor(props){
         super(props)
         this.state = {
+          toggleCreateAccount: false,
           items: []
         }
     }
@@ -31,23 +32,19 @@ class AccountManagement extends React.Component{
 
 
 
-
-
 render(){
     return(
         <div>
+         AccountManagement
         
-        AccountManagement
-        
-         
-        <div>
-        <CreateAccountForm/>
-        
-        </div>
-        <Grid>
-        <AccountPage items={this.state.items}/>
+       
+         <CreateAccountForm/> 
 
-        </Grid>
+         <AccountPage items={this.state.items}  style={{
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}/>
+        
         </div>
         
         )
@@ -61,48 +58,41 @@ const AccountPage =(props)=>{
         <div >
        
 
-
-        <table style={{
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}>
-          <tbody>
-        <tr>
-        <th>one</th>
-        <th>two</th>
-        <th>three</th>
-        </tr>
- 
- 
- 
-        <tr>
-      
+        
+        <div style={{display: 'flex', flexDirection: 'column', width:'75vw', overflow:'auto'}}>
+       
         {
             props.items.map((m)=>{
        return (
-          <tr key={m.id}>
-          <td   style={{border: '2px solid black', width: '10rem' }} className='m-2'>
+          
+          <div key={m.id} className='text-center' style={{width:'100vw', border: '2px dashed black', display: 'flex', flexDirection: 'row'}} >
+          <div  style={{border: '2px solid black', width: '25%' }} className='m-2'>
+<button>
+Transactions
+</button>            
+          </div>
+          <div  style={{border: '2px solid black', width: '25%' }} className='m-2'>
           <Checkbox style={{width: '3rem'}}/>
             
-          </td>
-          <td style={{border: '2px solid black', width: '10rem' }} className='m-2'>
+          </div>
+          <div style={{border: '2px solid black', width: '25%' }} className='m-2'>
           <h6 className='m-2'>Checking</h6>
-          </td>
-          <td style={{border: '2px solid black', width: '10rem' }} className='m-2'>
+          </div>
+          <div style={{border: '2px solid black', width: '25%' }} className='m-2'>
           <h6 className='m-2'>{m.itemName}</h6>
-          </td>
+          </div>
           
-          <td style={{border: '2px solid black', width: '10rem' }} className='m-2'>
+          <div style={{border: '2px solid black', width: '25%' }} className='m-2'>
           <h6 className='m-2'>Balance</h6>
-          </td>
+          </div>
           
-        </tr>
+          </div>
+        
        )
             })
         }
-</tr>
-        </tbody>
-        </table>
+      
+        </div>
        
         </div>
     )
@@ -119,11 +109,9 @@ const CreateAccountForm = () =>{
     
         <div style={{width: '200px'}}>
        <form>
-       <TextField type='text'/>
-       <button> + add account</button>
+       <input type='text'/>
+       <button> add account</button>
        </form>
-    
-    
     
         </div>
     
