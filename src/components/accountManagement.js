@@ -37,10 +37,10 @@ class AccountManagement extends React.Component{
 render(){
     return(
         <div>
-        
+        <CreateAccountForm className='m-2'/>
 
-        <div className="table-responsive">
-        <CreateAccountForm/>
+
+        <div style={{height: '50vh', width: '75vw', overflow: 'auto'}} className="table-responsive mt-1">
         <table className="table table-striped table-hover table-bordered mb-4">
           
         <thead className="thead-light">
@@ -49,7 +49,9 @@ render(){
           <tr>
             
               <th scope="col">#</th>
-              <th scope="col">Account</th>
+              <th scope="col">Type</th>
+              <th scope="col">Description</th>
+
               <th scope="col">Balance</th>
 
               <th scope="col">Reconciled</th>
@@ -63,6 +65,7 @@ render(){
             return(
                 <tr key={m.id}>
                 <td> {this.state.items.indexOf(m) + 1}</td>
+                <td >{m.accountType}  </td>
 
                 <td > <a href={`/transactions/${m.accountOwnerId}`}>{m.accountDescription}</a>  </td>
                 <td >{m.accountBalance}</td>
