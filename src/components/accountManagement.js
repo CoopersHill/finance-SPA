@@ -131,7 +131,7 @@ fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azureweb
         <div className='text-left'  >
     
         <h5 className='mx-3'>Create Account</h5>
-        <form className='mx-2 text-center' style={{border: '2px solid black', width: '360px', display: 'flex', flexDirection: 'row'}} onSubmit={(e)=>{
+        <form className='mx-2 text-center' style={{border: '1px solid black', width: '360px', display: 'flex', flexDirection: 'row'}} onSubmit={(e)=>{
            e.preventDefault()
           createAccount()
        }}>
