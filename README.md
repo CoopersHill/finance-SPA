@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 *******IMPORTANT NOTE********
 THIS PROJECT USES YARN AND NOT NPM.SO...
+MAKE SURE YOU PULL DOWN THE CORRECT BRANCH. UNAPPROVED CHANGES ARE*** NOT *** IN THE MAIN BRANCH
 1.
 A make sure you have yarn installed.
 run
