@@ -37,12 +37,16 @@ class AccountManagement extends React.Component{
 render(){
     return(
         <div>
-        <CreateAccountForm/> 
+        
 
         <div className="table-responsive">
+        <CreateAccountForm/>
         <table className="table table-striped table-hover table-bordered mb-4">
-          <thead className="thead-light">
-            <tr>
+          
+        <thead className="thead-light">
+           
+
+          <tr>
             
               <th scope="col">#</th>
               <th scope="col">Account</th>
@@ -58,7 +62,8 @@ render(){
           {this.state.items.map((m)=>{
             return(
                 <tr key={m.id}>
-                <td>{m.id}</td>
+                <td> {this.state.items.indexOf(m) + 1}</td>
+
                 <td > <a href={`/transactions/${m.accountOwnerId}`}>{m.accountDescription}</a>  </td>
                 <td >{m.accountBalance}</td>
 
@@ -91,18 +96,63 @@ render(){
 
 
 const CreateAccountForm = () =>{
+    const [accountType, setAccountType] = useState('checking')
+    const [accountDescription, setAccountDescription] = useState(`${accountType} Account`)
+
+    
+    // accounttype needs to be a number until the api changes it to a string
+const createAccount = ()=>{
+    
     let accountObject = {
-        alpha: 0,
-        beta: 0, 
-        gamma: 0, 
-        delta:0
+        accountType: 0,
+        accountDescription, 
+        
     }
+console.log(accountObject)
+fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azurewebsites.net/api/BankAccounts', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify(accountObject)
+})
+.then(response => response.json())
+.then((data)=>{
+    console.log(data)
+})
+   
+}
+
     return (
     
-        <div style={{width: '200px'}}>
-       <form>
-       <input type='text'/>
-       <button> add account</button>
+        <div  >
+    type:  {accountType} description: {accountDescription}
+        <form style={{display: 'flex', flexDirection: 'row'}} onSubmit={(e)=>{
+           e.preventDefault()
+          createAccount()
+       }}>
+       <select
+       className='p-2 mx-1'
+       style={{width: '7.5%' }}
+       required={true}
+       onChange={(e)=>{
+           e.preventDefault()
+           setAccountType(e.target.value)
+           
+       }}
+       
+       name='accountTypeDropdown' >
+       <option className='text-right' value ='checking'> default</option>
+       <option className='text-center' value = 'checking'> Checking</option>
+       <option className='text-center' value = 'savings'> Savings</option>
+       <option className='text-center' value = 'joint'> Joint</option>
+       </select>
+       <input className='p-2 mx-1' 
+       placeholder='Description'
+       type='text' maxLength='50' onChange={(e)=>{
+           setAccountDescription(e.target.value)
+       }} />
+       <button className='p-2 mx-1' style={{width: '10%'}}> add account</button>
        </form>
     
         </div>

@@ -36,8 +36,8 @@ super(props)
 
 
 componentDidMount(){
-    fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
-    .then(response => response.json())
+  fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azurewebsites.net/api/Transactions')
+  .then(response => response.json())
     .then((data) =>{
        
       let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
@@ -45,9 +45,9 @@ componentDidMount(){
       this.setState({
             items: data,
             staticItems: data,
-            projectedBalanceTotal: projectedBalanceCalc(realData) / 100, 
-            pendingTransactionsTotal: pendingTransactionsCalc(realData) /100, 
-            actualTransactionsTotal: actualTransactionsCalc(realData) /100
+            projectedBalanceTotal: projectedBalanceCalc(realData)  , 
+            pendingTransactionsTotal: pendingTransactionsCalc(realData), 
+            actualTransactionsTotal: actualTransactionsCalc(realData)
         })
         console.log('real data', realData)
     })
