@@ -84,10 +84,7 @@ render(){
         <Grid item className='text-center' style={{color: 'white', width: '35vw'}} >
         filters, create and sort will go here
 
-        <FilterCard
-        handleItemsChange={this.handleItemsChange} items={this.state.staticItems}/>
-
-<SortCard handleItemsChange={this.handleItemsChange} items={this.state.staticItems} /> 
+      
 
         </Grid>
     

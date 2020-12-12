@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Grid,Checkbox, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
+import { Grid,Checkbox, TextField, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
 
 
 
@@ -125,16 +125,15 @@ fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azureweb
 
     return (
     
-        <div  >
-    type:  {accountType} description: {accountDescription}
-        <form style={{display: 'flex', flexDirection: 'row'}} onSubmit={(e)=>{
+        <div className='text-left'  >
+    
+        <h5 className='mx-3'>Create Account</h5>
+        <form className='mx-2 text-center' style={{border: '2px solid black', width: '360px', display: 'flex', flexDirection: 'row'}} onSubmit={(e)=>{
            e.preventDefault()
           createAccount()
        }}>
-       <select
-       className='p-2 mx-1'
-       style={{width: '7.5%' }}
-       required={true}
+       <select 
+
        onChange={(e)=>{
            e.preventDefault()
            setAccountType(e.target.value)
@@ -142,17 +141,19 @@ fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azureweb
        }}
        
        name='accountTypeDropdown' >
-       <option className='text-right' value ='checking'> default</option>
+       <option className='text-right' value ='checking'> Type</option>
        <option className='text-center' value = 'checking'> Checking</option>
        <option className='text-center' value = 'savings'> Savings</option>
        <option className='text-center' value = 'joint'> Joint</option>
        </select>
-       <input className='p-2 mx-1' 
+       <TextField
+       label='Description'
        placeholder='Description'
        type='text' maxLength='50' onChange={(e)=>{
            setAccountDescription(e.target.value)
        }} />
-       <button className='p-2 mx-1' style={{width: '10%'}}> add account</button>
+       <button        style={{height: '3rem', width: '9rem'}}
+       > add account</button>
        </form>
     
         </div>
