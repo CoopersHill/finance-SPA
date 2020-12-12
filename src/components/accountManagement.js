@@ -122,8 +122,9 @@ fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azureweb
 .then(response => response.json())
 .then((data)=>{
     console.log(data)
+    location.assign('/')
 })
-   
+  
 }
 
     return (
