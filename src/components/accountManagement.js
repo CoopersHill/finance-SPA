@@ -37,7 +37,12 @@ class AccountManagement extends React.Component{
         })
 Promise.resolve(objectServer(corsUrl, bankAccountsUrl, 2))
 .then((data)=>{
-    let accountData = data.transactions
+    let accountData = data.transactions.map((m)=>{
+        return Number(m.itemCost)
+    }).reduce((a, b)=>{
+        return a + b
+    })
+    console.log('adsdv',accountData)
   let newAccountData=   this.state.items.map((m)=>{
         if(m.id === 2){
             return {...m, accountData }
@@ -58,28 +63,6 @@ console.log('newaccount data', newAccountData)
         
     }
 
-getReconciled=(id)=>{
-    let tempTransactionCall = Promise.resolve(objectServer(corsUrl, bankAccountsUrl, id)) 
-    let tempTransactions
-    tempTransactionCall.then((data)=>{
- tempTransactions = data.transactions.map((m)=>{
-            return m.itemCost
-        }).reduce((a, b)=>{
-            return Number(a).toFixed() + Number(b).toFixed(2)
-        })
-
-        this.setState({tempTransactions: tempTransactions})
-
-     console.log('altered data', alteredItems)   
-    })
-    let alteredItems = this.state.items.map((m)=>{
-        if (m.id === id){
-            return {...m, reconciled: tempTransactions}
-        }
-    
-        
-    })
-}
 
 render(){
     return(
@@ -115,7 +98,7 @@ render(){
                 <td > <a href={`/transactions/${m.id}`}>{m.accountType === 123 ? 'Checking' : 'Savings' }</a>  </td>
                 <td >{m.accountBalance}</td>
 
-                <td >{m.accountData ? m.accountData[0].itemCost : <CheckBox/>  }</td>
+                <td >{m.accountData ? m.accountData : <Checkbox/>  }</td>
                 </tr>
             )
         })}
