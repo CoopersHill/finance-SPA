@@ -1,13 +1,16 @@
 import React, {useState} from 'react'
 import { Grid,Checkbox, TextField, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
+import {apiCall, corsUrl, transactionsUrl } from '../Functions/apiCall'
 
 
 
 import allTransactions from '../Functions/apiCall'
-// create account form
-// link to transaction page
-// buttons representing accounts on left side reveal acount component populated with mock account dat
-// button that toggles account Form
+
+// table
+// description to account (type)
+// account checking and savings
+// translate account type from number to corresponding string ie 'checking'
+
 class AccountManagement extends React.Component{
     constructor(props){
         super(props)
@@ -122,7 +125,7 @@ fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azureweb
 .then(response => response.json())
 .then((data)=>{
     console.log(data)
-    location.assign('/')
+    window.location.assign('/')
 })
   
 }

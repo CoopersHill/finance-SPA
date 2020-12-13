@@ -2,11 +2,13 @@ import React, { Fragment } from 'react';
 import moment from 'moment'
 import FilterCard from './FilterCard'
 import SortCard from './SortCard'
-
+import {apiCall, corsUrl, transactionsUrl } from '../Functions/apiCall'
 import { Grid, Badge, Card, Button} from '@material-ui/core';
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
 import {searchByIDTransaction} from '../Functions/searchFunctions'
-
+// grab transactions through account id parameter, instead of all transactions general via api call file
+// extract corsanywhere intp a variable
+// refactor fetch call to use url variables as params
 
 class Transactions extends React.Component {
 constructor(props){
@@ -36,21 +38,22 @@ super(props)
 
 
 componentDidMount(){
-  fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azurewebsites.net/api/Transactions')
-  .then(response => response.json())
-    .then((data) =>{
+  Promise.resolve(apiCall(corsUrl, transactionsUrl))
+  .then((data) =>{
        
-      let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
+    let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
 
-      this.setState({
-            items: data,
-            staticItems: data,
-            projectedBalanceTotal: projectedBalanceCalc(realData)  , 
-            pendingTransactionsTotal: pendingTransactionsCalc(realData), 
-            actualTransactionsTotal: actualTransactionsCalc(realData)
-        })
-        console.log('real data', realData)
-    })
+    this.setState({
+          items: data,
+          staticItems: data,
+          projectedBalanceTotal: projectedBalanceCalc(realData)  , 
+          pendingTransactionsTotal: pendingTransactionsCalc(realData), 
+          actualTransactionsTotal: actualTransactionsCalc(realData)
+      })
+      console.log('real data', realData)
+  })
+  
+    
 }
 
 handleItemsChange=(value)=>{

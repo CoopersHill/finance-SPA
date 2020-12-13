@@ -1,14 +1,15 @@
+export let corsUrl = 'https://cors-anywhere.herokuapp.com'
+export let transactionsUrl = 'https://testwarrenfinanceapi.azurewebsites.net/api/Transactions'
+export let bankAccountsUrl = 'https://testwarrenfinanceapi.azurewebsites.net/api/BankAccounts'
 
-
-
-let allTransactions =()=>{
-    fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
+export let apiCall =(urlCors='', urlBase, param = '')=>{
+      
+  return  fetch(`${urlCors}/${urlBase}/${param}`)
     .then(response => response.json())
     .then((data)=>{
-        console.log(data)
+       
+        return data
     })
     
 
 }
-
-export default allTransactions
