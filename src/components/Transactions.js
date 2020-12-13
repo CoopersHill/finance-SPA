@@ -48,10 +48,10 @@ super(props)
 componentDidMount(){
 let id = this.props.match.params.id
 console.log('api call', objectServer(corsUrl, bankAccountsUrl, id))
+let fetchUrl = corsUrl + bankAccountsUrl + id
 
-
-console.log('id', id)
-  Promise.resolve(objectServer(corsUrl, bankAccountsUrl, id))
+console.log('id', fetchUrl)
+  Promise.resolve(objectServer(fetchUrl))
   .then((data) =>{
        
     let realData = (data.transactions) ? data.transactions : [{itemName: 'testItem', itemCost: 10}]
