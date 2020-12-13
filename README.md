@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with Enterprise Finance Application
 *******IMPORTANT NOTE********
 THIS PROJECT USES YARN AND NOT NPM.SO...
 MAKE SURE YOU PULL DOWN THE CORRECT BRANCH. UNAPPROVED CHANGES ARE*** NOT *** IN THE MAIN BRANCH
