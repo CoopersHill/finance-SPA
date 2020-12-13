@@ -10,7 +10,7 @@ import {
 
 import FilterCard from './FilterCard'
 import SortCard from './SortCard'
-import {apiCall, corsUrl, bankAccountsUrl, transactionsUrl } from '../Functions/apiCall'
+import {objectServer, corsUrl, bankAccountsUrl, transactionsUrl } from '../Functions/objectServer'
 import { Grid, Badge, Card, Button} from '@material-ui/core';
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
 import {searchByIDTransaction} from '../Functions/searchFunctions'
@@ -47,18 +47,18 @@ super(props)
 
 componentDidMount(){
 let id = this.props.match.params.id
-console.log('api call', apiCall(corsUrl, bankAccountsUrl, id))
+console.log('api call', objectServer(corsUrl, bankAccountsUrl, id))
 
 
 console.log('id', id)
-  Promise.resolve(apiCall(corsUrl, transactionsUrl))
+  Promise.resolve(objectServer(corsUrl, bankAccountsUrl, id))
   .then((data) =>{
        
-    let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
+    let realData = (data.transactions) ? data.transactions : [{itemName: 'testItem', itemCost: 10}]
 
     this.setState({
-          items: data,
-          staticItems: data,
+          items: realData,
+          staticItems: realData,
           projectedBalanceTotal: projectedBalanceCalc(realData)  , 
           pendingTransactionsTotal: pendingTransactionsCalc(realData), 
           actualTransactionsTotal: actualTransactionsCalc(realData)
@@ -131,7 +131,7 @@ justifyItems: 'center' }}>
     </Grid>
     <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed black'}} className='text-right'  item >
     <p className="text-right text-primary">
-     ${m.itemCost}
+     ${m.itemCost.toFixed(2)}
 
       </p>
     </Grid>

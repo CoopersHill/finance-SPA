@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { Grid,Checkbox, TextField, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
-import {apiCall, corsUrl, bankAccountsUrl } from '../Functions/apiCall'
+import {objectServer, corsUrl, bankAccountsUrl } from '../Functions/objectServer'
+import {projectedBalanceCalc} from '../Functions/balanceCalcs'
 
 
 
-import allTransactions from '../Functions/apiCall'
 
 // table
 // description to account (type)
@@ -16,15 +16,17 @@ class AccountManagement extends React.Component{
         super(props)
         this.state = {
           checkboxValue: false,  
+          tempTransactions: [],
           toggleCreateAccount: true,
           items: []
         }
     }
     componentDidMount(){
-        Promise.resolve(apiCall(corsUrl, bankAccountsUrl))
+        let realData
+        Promise.resolve(objectServer(corsUrl, bankAccountsUrl))
         .then((data) =>{
            
-          let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
+           realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
     
           this.setState({
                 items: data
@@ -33,9 +35,51 @@ class AccountManagement extends React.Component{
         }).catch((e)=>{
             console.log(e)
         })
+Promise.resolve(objectServer(corsUrl, bankAccountsUrl, 2))
+.then((data)=>{
+    let accountData = data.transactions
+  let newAccountData=   this.state.items.map((m)=>{
+        if(m.id === 2){
+            return {...m, accountData }
+        }else{
+            return m
+        }
+        
+    })
+    this.setState({
+        items: newAccountData
+    })
+console.log('newaccount data', newAccountData)
+})
+        
+
+
+
+        
     }
 
+getReconciled=(id)=>{
+    let tempTransactionCall = Promise.resolve(objectServer(corsUrl, bankAccountsUrl, id)) 
+    let tempTransactions
+    tempTransactionCall.then((data)=>{
+ tempTransactions = data.transactions.map((m)=>{
+            return m.itemCost
+        }).reduce((a, b)=>{
+            return Number(a).toFixed() + Number(b).toFixed(2)
+        })
 
+        this.setState({tempTransactions: tempTransactions})
+
+     console.log('altered data', alteredItems)   
+    })
+    let alteredItems = this.state.items.map((m)=>{
+        if (m.id === id){
+            return {...m, reconciled: tempTransactions}
+        }
+    
+        
+    })
+}
 
 render(){
     return(
@@ -66,20 +110,12 @@ render(){
           {this.state.items.map((m)=>{
             return(
                 <tr key={m.id}>
-                <td> {this.state.items.indexOf(m) + 1}</td>
+                <td> {m.id}</td>
 
                 <td > <a href={`/transactions/${m.id}`}>{m.accountType === 123 ? 'Checking' : 'Savings' }</a>  </td>
                 <td >{m.accountBalance}</td>
 
-                <td >{this.state.checkboxValue} {m.transactions.length > 0 ? m.transactions.map((m)=>{return m.ItemCost}).reduce((a, b)=>{
-                    return a + b
-                }) : <Checkbox value={this.state.checkboxValue}
-                    onClick={(e)=>{
-                        e.preventDefault()
-                        this.setState({checkboxValue: !e.target.value})
-
-                    }}
-                    value={true}/>}</td>
+                <td >{m.accountData ? m.accountData[0].itemCost : <CheckBox/>  }</td>
                 </tr>
             )
         })}
