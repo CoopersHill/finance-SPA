@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Grid,Checkbox, TextField, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
-import {apiCall, corsUrl, transactionsUrl } from '../Functions/apiCall'
+import {apiCall, corsUrl, bankAccountsUrl } from '../Functions/apiCall'
 
 
 
@@ -20,7 +20,7 @@ class AccountManagement extends React.Component{
         }
     }
     componentDidMount(){
-        fetch('https://cors-anywhere.herokuapp.com/https://testwarrenfinanceapi.azurewebsites.net/api/BankAccounts')
+        Promise.resolve(apiCall(corsUrl, bankAccountsUrl))
         .then(response => response.json())
         .then((data) =>{
            
