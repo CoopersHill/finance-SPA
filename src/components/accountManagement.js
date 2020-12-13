@@ -15,13 +15,13 @@ class AccountManagement extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-          toggleCreateAccount: false,
+          checkboxValue: false,  
+          toggleCreateAccount: true,
           items: []
         }
     }
     componentDidMount(){
         Promise.resolve(apiCall(corsUrl, bankAccountsUrl))
-        .then(response => response.json())
         .then((data) =>{
            
           let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
@@ -52,8 +52,7 @@ render(){
           <tr>
             
               <th scope="col">#</th>
-              <th scope="col">Type</th>
-              <th scope="col">Description</th>
+              <th scope="col">Account</th>
 
               <th scope="col">Balance</th>
 
@@ -68,12 +67,19 @@ render(){
             return(
                 <tr key={m.id}>
                 <td> {this.state.items.indexOf(m) + 1}</td>
-                <td >{m.accountType}  </td>
 
-                <td > <a href={`/transactions/${m.accountOwnerId}`}>{m.accountDescription}</a>  </td>
+                <td > <a href={`/transactions/${m.id}`}>{m.accountType === 123 ? 'Checking' : 'Savings' }</a>  </td>
                 <td >{m.accountBalance}</td>
 
-                <td >{m.transactions.length > 0 ? m.transactions.length : 'NO TRANSACTIONS'}</td>
+                <td >{this.state.checkboxValue} {m.transactions.length > 0 ? m.transactions.map((m)=>{return m.ItemCost}).reduce((a, b)=>{
+                    return a + b
+                }) : <Checkbox value={this.state.checkboxValue}
+                    onClick={(e)=>{
+                        e.preventDefault()
+                        this.setState({checkboxValue: !e.target.value})
+
+                    }}
+                    value={true}/>}</td>
                 </tr>
             )
         })}

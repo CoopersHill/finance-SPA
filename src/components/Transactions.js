@@ -1,8 +1,16 @@
 import React, { Fragment } from 'react';
 import moment from 'moment'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom"
+
 import FilterCard from './FilterCard'
 import SortCard from './SortCard'
-import {apiCall, corsUrl, transactionsUrl } from '../Functions/apiCall'
+import {apiCall, corsUrl, bankAccountsUrl, transactionsUrl } from '../Functions/apiCall'
 import { Grid, Badge, Card, Button} from '@material-ui/core';
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
 import {searchByIDTransaction} from '../Functions/searchFunctions'
@@ -38,6 +46,11 @@ super(props)
 
 
 componentDidMount(){
+let id = this.props.match.params.id
+console.log('api call', apiCall(corsUrl, bankAccountsUrl, id))
+
+
+console.log('id', id)
   Promise.resolve(apiCall(corsUrl, transactionsUrl))
   .then((data) =>{
        

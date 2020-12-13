@@ -17,7 +17,7 @@ const AppRouter =() => (
     <Switch>
     <Route path="/"  component={AccountManagement} exact={true}/>
     <Route path="/accountManagement" component={AccountManagement} />
-    <Route path="/transactions/:id" component={Transactions} />
+    <Route path="/transactions/:id"  component={Transactions} />
     
     </Switch>
     </div>      

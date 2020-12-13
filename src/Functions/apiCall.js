@@ -7,7 +7,7 @@ export let apiCall =(urlCors='', urlBase, param = '')=>{
   return  fetch(`${urlCors}/${urlBase}/${param}`)
     .then(response => response.json())
     .then((data)=>{
-       
+       console.log('logged data', data)
         return data
     })
     
