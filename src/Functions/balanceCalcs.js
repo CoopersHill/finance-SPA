@@ -73,7 +73,7 @@ return pendingTransactionsReduced = 0
       if(m.recStatus === true){
      return   actualTransactions.push(m.itemCost.toFixed(2))
       }    
-        
+        return 0
       })
   
     let actualTransactionsReduced = actualTransactions.reduce((a, b)=>{
