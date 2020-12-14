@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment'
 
 
-import {objectServer, corsUrl, transactionsUrl } from '../Functions/objectServer'
+import {objectServer, corsUrl, transactionsUrl, bankAccountsUrl } from '../Functions/objectServer'
 import { Grid, Badge, Card, Button} from '@material-ui/core';
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
 import {searchByIDTransaction} from '../Functions/searchFunctions'
@@ -40,23 +40,20 @@ super(props)
 componentDidMount(){
 let id = this.props.match.params.id
 
-  Promise.resolve(objectServer(corsUrl, transactionsUrl))
+  Promise.resolve(objectServer(bankAccountsUrl, id))
   .then((data) =>{
     
-    let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
-let filteredById = realData.filter((f)=>{
-  return f.bankAccountId === Number(id)
-})
+    let realData = (data.transactions) ? data.transactions : [{itemName: 'testItem', itemCost: 10}]
+
     this.setState({
-          items: filteredById,
-          staticItems: filteredById,
+          items: realData,
+          staticItems: realData,
           projectedBalanceTotal: projectedBalanceCalc(realData)  , 
           pendingTransactionsTotal: pendingTransactionsCalc(realData), 
           actualTransactionsTotal: actualTransactionsCalc(realData)
       })
-      console.log('real data', data)
-      console.log(id)
-      console.log('filtered', filteredById)
+      console.log('real data', realData)
+    
 
   })
   

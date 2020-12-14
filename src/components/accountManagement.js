@@ -23,8 +23,8 @@ class AccountManagement extends React.Component{
     }
     componentDidMount(){
         let realData
-        
-        Promise.resolve(objectServer(corsUrl, bankAccountsUrl))
+        console.log(bankAccountsUrl)
+        Promise.resolve(objectServer('https://testwarrenfinanceapi.azurewebsites.net/api/BankAccounts'))
         .then((data) =>{
            
            realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
