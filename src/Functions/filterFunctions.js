@@ -2,7 +2,7 @@
 
 
 export const filterByName =(arr, searchTerm)=>{
-    let regexPattern = new RegExp(searchTerm)
+    let regexPattern = new RegExp(searchTerm, 'gmi')
 
     
     let filtered = arr.filter((f)=>{
@@ -20,9 +20,12 @@ export const filterByStatus = (arr, status)=>{
     return array
 }
 
-export const filterByCost =(arr, cost1)=>{
-    let filtered = arr.map((m)=>{
-        return m.itemCost === cost1
+export const filterByCost =(arr, cost1, cost2)=>{
+    let filtered = arr.filter((f)=>{
+        return Number(f.itemCost) >= Number(cost1)
+    
+    }).filter((f)=>{
+        return Number(f.itemCost) <= cost2
     })
     console.log('filtered', filtered)
     return filtered

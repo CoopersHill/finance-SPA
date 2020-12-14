@@ -9,13 +9,13 @@ export const projectedBalanceCalc = (arr)=>{
     let projectedCosts = [0]
     
     arr.map((m)=>{
-   projectedCosts.push(m.itemCost)
+   projectedCosts.push(m.itemCost.toFixed(2))
     
-      return m.itemCost
+      return m.itemCost.toFixed(2)
     })
     
     let projectedBalanceReduced =   projectedCosts.reduce((a, b)=>{
-    return  a+b
+    return  Number(a)+Number(b)
     })
     
     
@@ -35,7 +35,7 @@ let array = arr.filter((f)=>{
 
     array.map((m)=>{
       if(m.recStatus === false){
-       pendingTransactions.push(m.itemCost)
+       pendingTransactions.push(m.itemCost.toFixed(2))
       }    
         return m
       })
@@ -43,7 +43,7 @@ let array = arr.filter((f)=>{
       let pendingTransactionsReduced
 if(pendingTransactions.length > 0){
 return pendingTransactionsReduced =  pendingTransactions.reduce((a, b)=>{
-    return  a+b
+    return  Number(a) + Number(b)
     })
 }else if(pendingTransactions.length < 1){
 return pendingTransactionsReduced = 0
@@ -71,13 +71,13 @@ return pendingTransactionsReduced = 0
 
     array.map((m)=>{
       if(m.recStatus === true){
-     return   actualTransactions.push(m.itemCost)
+     return   actualTransactions.push(m.itemCost.toFixed(2))
       }    
         return 0
       })
   
     let actualTransactionsReduced = actualTransactions.reduce((a, b)=>{
-      return  a+b
+      return  Number(a)+Number(b)
       })
 
    

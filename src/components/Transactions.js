@@ -1,9 +1,14 @@
 import React from 'react';
 import moment from 'moment'
 
-import { Grid, Badge, Card, Button} from '@material-ui/core';
 
+import {objectServer, corsUrl, transactionsUrl, bankAccountsUrl } from '../Functions/objectServer'
+import { Grid, Badge, Card, Button} from '@material-ui/core';
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
+import {searchByIDTransaction} from '../Functions/searchFunctions'
+// grab transactions through account id parameter, instead of all transactions general via api call file
+// extract corsanywhere intp a variable
+// refactor fetch call to use url variables as params
 
 class Transactions extends React.Component {
 constructor(props){
@@ -33,21 +38,26 @@ super(props)
 
 
 componentDidMount(){
-    fetch('https://cors-anywhere.herokuapp.com/https://hwfinanceapp20201201223059.azurewebsites.net/api/transactions')
-    .then(response => response.json())
-    .then((data) =>{
-       
-      let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
+let id = this.props.match.params.id
 
-      this.setState({
-            items: data,
-            staticItems: data,
-            projectedBalanceTotal: projectedBalanceCalc(realData) / 100, 
-            pendingTransactionsTotal: pendingTransactionsCalc(realData) /100, 
-            actualTransactionsTotal: actualTransactionsCalc(realData) /100
-        })
-        console.log('real data', realData)
-    })
+  Promise.resolve(objectServer(bankAccountsUrl, id))
+  .then((data) =>{
+    
+    let realData = (data.transactions) ? data.transactions : [{itemName: 'testItem', itemCost: 10}]
+
+    this.setState({
+          items: realData,
+          staticItems: realData,
+          projectedBalanceTotal: projectedBalanceCalc(realData)  , 
+          pendingTransactionsTotal: pendingTransactionsCalc(realData), 
+          actualTransactionsTotal: actualTransactionsCalc(realData)
+      })
+      console.log('real data', realData)
+    
+
+  })
+  
+    
 }
 
 handleItemsChange=(value)=>{
@@ -56,6 +66,7 @@ this.setState({
 })
 
 console.log('new items', value)
+
 }
 
 
@@ -80,6 +91,9 @@ render(){
         <Grid container >
         <Grid item className='text-center' style={{color: 'white', width: '35vw'}} >
         filters, create and sort will go here
+
+      
+
         </Grid>
     
         <Grid item className='text-center' >
@@ -109,7 +123,7 @@ justifyItems: 'center' }}>
     </Grid>
     <Grid style={{height:'1.5rem', width:'50%', borderBottom: '1px dashed black'}} className='text-right'  item >
     <p className="text-right text-primary">
-     ${m.itemCost}
+     ${m.itemCost.toFixed(2)}
 
       </p>
     </Grid>
@@ -134,7 +148,13 @@ justifyItems: 'center' }}>
    </Grid> 
 
 <div className='mt-2'>
-<Button variant="outlined" color="primary">update</Button><Button variant="outlined" color="secondary">delete</Button>  
+<Button 
+onClick={()=>{
+  searchByIDTransaction(m.id)
+}}
+variant="outlined" color="primary">update</Button>
+
+<Button variant="outlined" color="secondary">delete</Button>  
 
 </div>
     
