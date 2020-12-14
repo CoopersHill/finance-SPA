@@ -1,16 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import moment from 'moment'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom"
 
-import FilterCard from './FilterCard'
-import SortCard from './SortCard'
-import {objectServer, corsUrl, bankAccountsUrl, transactionsUrl } from '../Functions/objectServer'
+
+import {objectServer, corsUrl, transactionsUrl } from '../Functions/objectServer'
 import { Grid, Badge, Card, Button} from '@material-ui/core';
 import {projectedBalanceCalc, pendingTransactionsCalc, actualTransactionsCalc} from '../Functions/balanceCalcs'
 import {searchByIDTransaction} from '../Functions/searchFunctions'
@@ -47,23 +39,25 @@ super(props)
 
 componentDidMount(){
 let id = this.props.match.params.id
-console.log('api call', objectServer(corsUrl, bankAccountsUrl, id))
-let fetchUrl = corsUrl + bankAccountsUrl + id
 
-console.log('id', fetchUrl)
-  Promise.resolve(objectServer(fetchUrl))
+  Promise.resolve(objectServer(corsUrl, transactionsUrl))
   .then((data) =>{
-       
-    let realData = (data.transactions) ? data.transactions : [{itemName: 'testItem', itemCost: 10}]
-
+    
+    let realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
+let filteredById = realData.filter((f)=>{
+  return f.bankAccountId === Number(id)
+})
     this.setState({
-          items: realData,
-          staticItems: realData,
+          items: filteredById,
+          staticItems: filteredById,
           projectedBalanceTotal: projectedBalanceCalc(realData)  , 
           pendingTransactionsTotal: pendingTransactionsCalc(realData), 
           actualTransactionsTotal: actualTransactionsCalc(realData)
       })
-      console.log('real data', realData)
+      console.log('real data', data)
+      console.log(id)
+      console.log('filtered', filteredById)
+
   })
   
     
@@ -75,6 +69,7 @@ this.setState({
 })
 
 console.log('new items', value)
+
 }
 
 

@@ -35,29 +35,6 @@ class AccountManagement extends React.Component{
         }).catch((e)=>{
             console.log(e)
         })
-Promise.resolve(objectServer(corsUrl, bankAccountsUrl, 2))
-.then((data)=>{
-    let accountData = data.transactions.map((m)=>{
-        return Number(m.itemCost)
-    }).reduce((a, b)=>{
-        return a + b
-    })
-    console.log('adsdv',accountData)
-  let newAccountData=   this.state.items.map((m)=>{
-        if(m.id === 2){
-            return {...m, accountData }
-        }else{
-            return m
-        }
-        
-    })
-    this.setState({
-        items: newAccountData
-    })
-console.log('newaccount data', newAccountData)
-})
-        
-
 
 
         
