@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Grid,Checkbox, TextField, FormControlLabel, Badge, Card, CardContent, Button, GridList} from '@material-ui/core';
-import {objectServer, corsUrl, bankAccountsUrl } from '../Functions/objectServer'
+import {objectServer, corsUrl, bankAccountsUrl, transactionsUrl } from '../Functions/objectServer'
 import {projectedBalanceCalc} from '../Functions/balanceCalcs'
 
 
@@ -23,13 +23,14 @@ class AccountManagement extends React.Component{
     }
     componentDidMount(){
         let realData
+        
         Promise.resolve(objectServer(corsUrl, bankAccountsUrl))
         .then((data) =>{
            
            realData = (data) ? data : [{itemName: 'testItem', itemCost: 10}]
     
           this.setState({
-                items: data
+                items: realData
             })
             console.log('real data', realData)
         }).catch((e)=>{
@@ -75,7 +76,7 @@ render(){
                 <td > <a href={`/transactions/${m.id}`}>{m.accountType === 123 ? 'Checking' : 'Savings' }</a>  </td>
                 <td >{m.accountBalance}</td>
 
-                <td >{m.accountData ? m.accountData : <Checkbox/>  }</td>
+                <td><Checkbox/></td>
                 </tr>
             )
         })}
